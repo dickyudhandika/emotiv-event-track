@@ -40,15 +40,19 @@ Values: 21
 
 ## Product label variants (same `product` section, explicit labels)
 
-| Export | Label |
+Factory export — label passed at wiring time per card instance:
+
+| Export | Usage |
 |---|---|
-| `trackProductEpocX` | Epoc X |
-| `trackProductMN8` | MN8 |
-| `trackProductFlex` | Flex 2.0 |
-| `trackProductInsight` | Insight |
+| `trackProduct("Epoc X")` | Epoc X card |
+| `trackProduct("MN8")` | MN8 card |
+| `trackProduct("Flex 2.0")` | Flex 2.0 card |
+| `trackProduct("Insight")` | Insight card |
+
+Needed because button text is identical across cards (`View Specs` ×4) — auto-capture can't differentiate. Designer types the product name when applying the override.
 
 ## Notes
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (28 exports total).
+- Exports live in `templates/umami.tsx` (25 exports total).

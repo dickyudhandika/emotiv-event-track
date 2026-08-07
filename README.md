@@ -48,7 +48,7 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 
-**Product label variants** (same `product` section, explicit labels): `Epoc X`, `MN8`, `Flex 2.0`, `Insight`.
+**Product label variants** (same `product` section, explicit labels): factory `trackProduct("Epoc X")` / `trackProduct("MN8")` / `trackProduct("Flex 2.0")` / `trackProduct("Insight")` — label typed at wiring time, needed because button text is identical across cards.
 
 Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
 
