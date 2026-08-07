@@ -15,6 +15,37 @@ Umami custom events have three dimensions:
 
 This repo defines the **section vocabulary** — the controlled list of `section` values per site — plus the rules for how values get added, so dashboards stay comparable and history doesn't break on redesign.
 
+### Available values (EMOTIV)
+
+| # | Value | Role | Pages | Example CTAs | Event |
+|---|---|---|---|---|---|
+| 1 | `nav` | global navigation | all | Shop Now | `cta_click` |
+| 2 | `hero` | first fold | all | Buy now, User & Product Research | `cta_click` |
+| 3 | `banner` | promo band / 2nd hero | pages with promo | promo CTA | `cta_click` |
+| 4 | `applications` | use-case cards | homepage | Access Research Hub, card clicks | `cta_click` |
+| 5 | `pathway` | audience selector | homepage | Unlock What Customers Really Want, Play Now, Start Building | `cta_click` |
+| 6 | `platform` | platform pitch | homepage | Start Building | `cta_click` |
+| 7 | `product` | hardware/accessory grid | homepage, comparison, accessories | View Specs, Shop now, See Accessory | `cta_click` |
+| 8 | `news` | article cards | homepage, blog index | Read latest news, Learn more | `content_click` |
+| 9 | `footer` | footer band + newsletter | all | User & Product Research, Academic Research | `cta_click` |
+| 10 | `productnav` | product sub-nav | product pages | Overview, Case studies, Tech Specs, Buy | `cta_click` |
+| 11 | `features` | spec feature grid | product pages | feature card clicks | `cta_click` |
+| 12 | `casestudies` | case study cards | product pages | See case study ×3 | `content_click` |
+| 13 | `testimonials` | researcher quotes | product pages | Validation Studies | `cta_click` |
+| 14 | `leadmagnet` | whitepaper download + form | product pages | Download whitepaper | `form_submit` |
+| 15 | `specs` | specifications accordion | product pages, comparison | Specifications | `cta_click` |
+| 16 | `usecases` | solution use-case cards | solution pages (enterprise, academic, developer) | Customer Experiences, Workplace Wellness | `cta_click` |
+| 17 | `gettingstarted` | developer onboarding 3-step | /developer | Create an Emotiv account, Register your app | `cta_click` |
+| 18 | `tiers` | developer partner tiers | /developer | Register, Contact us | `cta_click` |
+| 19 | `community` | developer Learn & Connect | /developer | Explore, Go to Github | `content_click` |
+| 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
+
+**Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
+
+**Product label variants** (same `product` section, explicit labels): `Epoc X`, `MN8`, `Flex 2.0`, `Insight`.
+
+Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
+
 ## Why it matters
 
 - **Cross-page comparison** — `section=hero` means the same thing on every page. Numbers or per-page names break this.
