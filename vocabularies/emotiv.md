@@ -2,7 +2,7 @@
 
 Site: https://www.emotiv.com
 Updated: 2026-08-07
-Values: 20
+Values: 21
 
 ## Vocabulary
 
@@ -28,6 +28,7 @@ Values: 20
 | 18 | `tiers` | developer partner tiers | /developer | Register, Contact us | `cta_click` |
 | 19 | `community` | developer Learn & Connect | /developer | Explore, Go to Github | `content_click` |
 | 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
+| 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
 
 ## Legacy (kept for other pages, not in count)
 
@@ -50,4 +51,4 @@ Values: 20
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (27 exports total).
+- Exports live in `templates/umami.tsx` (28 exports total).

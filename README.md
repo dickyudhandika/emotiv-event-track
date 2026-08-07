@@ -44,6 +44,7 @@ This repo defines the **section vocabulary** — the controlled list of `section
 | 18 | `tiers` | developer partner tiers | /developer | Register, Contact us | `cta_click` |
 | 19 | `community` | developer Learn & Connect | /developer | Explore, Go to Github | `content_click` |
 | 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
+| 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 

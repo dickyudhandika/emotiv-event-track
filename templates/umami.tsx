@@ -7,7 +7,7 @@ import { forwardRef, type ComponentType } from "react"
 // Label disambiguates within a section. Event name = action verb only.
 // Values: nav, hero, banner, applications, pathway, platform, product, news,
 //         footer, productnav, features, casestudies, testimonials, leadmagnet,
-//         specs, usecases, gettingstarted, tiers, community, download
+//         specs, usecases, gettingstarted, tiers, community, download, footernav
 // Legacy: pricing, howitworks, faq
 
 // ── Global / shared ──────────────────────────────────────────────────────────
@@ -318,6 +318,19 @@ export function trackDownload(Component: ComponentType): ComponentType {
                 {...props}
                 data-umami-event="cta_click"
                 data-umami-event-section="download"
+            />
+        )
+    })
+}
+
+export function trackFooterNav(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
             />
         )
     })
