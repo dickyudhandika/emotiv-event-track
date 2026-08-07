@@ -40,19 +40,19 @@ Values: 21
 
 ## Product label variants (same `product` section, explicit labels)
 
-Factory export — label passed at wiring time per card instance:
+Static exports — Framer picker only lists `(Component) => Component` signatures, so labels are hardcoded per product:
 
-| Export | Usage |
+| Export | Label |
 |---|---|
-| `trackProduct("Epoc X")` | Epoc X card |
-| `trackProduct("MN8")` | MN8 card |
-| `trackProduct("Flex 2.0")` | Flex 2.0 card |
-| `trackProduct("Insight")` | Insight card |
+| `trackProductEpocX` | Epoc X |
+| `trackProductMN8` | MN8 |
+| `trackProductFlex` | Flex 2.0 |
+| `trackProductInsight` | Insight |
 
-Needed because button text is identical across cards (`View Specs` ×4) — auto-capture can't differentiate. Designer types the product name when applying the override.
+Apply to card root (clickable link), not the button. Needed because button text is identical across cards (`View Specs` ×4) — auto-capture can't differentiate.
 
 ## Notes
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (25 exports total).
+- Exports live in `templates/umami.tsx` (29 exports total).

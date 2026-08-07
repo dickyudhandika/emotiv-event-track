@@ -51,18 +51,17 @@ export function trackBanner(Component: ComponentType): ComponentType {
     })
 }
 
-export function trackProduct(label?: string) {
-    return (Component: ComponentType): ComponentType => {
-        return forwardRef((props, ref) => (
+export function trackProduct(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
             <Component
                 ref={ref}
                 {...props}
                 data-umami-event="cta_click"
                 data-umami-event-section="product"
-                {...(label ? { "data-umami-event-label": label } : {})}
             />
-        ))
-    }
+        )
+    })
 }
 
 export function trackPricing(Component: ComponentType): ComponentType {
@@ -332,6 +331,66 @@ export function trackFooterNav(Component: ComponentType): ComponentType {
                 {...props}
                 data-umami-event="content_click"
                 data-umami-event-section="footernav"
+            />
+        )
+    })
+}
+
+// ── Product grid labels (View Specs ×4 — same event+section, label differentiates) ──
+// Static exports: Framer picker only lists (Component) => Component signatures.
+// Label hardcoded per product. Apply to card root (clickable link), not the button.
+
+export function trackProductEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-label="Epoc X"
+            />
+        )
+    })
+}
+
+export function trackProductMN8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-label="MN8"
+            />
+        )
+    })
+}
+
+export function trackProductFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-label="Flex 2.0"
+            />
+        )
+    })
+}
+
+export function trackProductInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-label="Insight"
             />
         )
     })
