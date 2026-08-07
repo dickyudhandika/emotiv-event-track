@@ -40,19 +40,19 @@ Values: 21
 
 ## Product label variants (same `product` section, explicit labels)
 
-Static exports — Framer picker only lists `(Component) => Component` signatures, so labels are hardcoded per product:
+`trackProduct` reads `props.title` — label = product name per instance. Apply once on the card root inside the component definition; every instance's own `title` flows through.
 
-| Export | Label |
+| Instance title | Resulting label |
 |---|---|
-| `trackProductEpocX` | Epoc X |
-| `trackProductMN8` | MN8 |
-| `trackProductFlex` | Flex 2.0 |
-| `trackProductInsight` | Insight |
+| `Epoc X` | Epoc X |
+| `MN8` | MN8 |
+| `Flex 2.0` | Flex 2.0 |
+| `Insight` | Insight |
 
-Apply to card root (clickable link), not the button. Needed because button text is identical across cards (`View Specs` ×4) — auto-capture can't differentiate.
+Requires the component prop convention: heading prop must be `title` (see `RULES.md`).
 
 ## Notes
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (29 exports total).
+- Exports live in `templates/umami.tsx` (25 exports total).

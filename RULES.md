@@ -76,6 +76,29 @@ Keep the event vocabulary small. `content_click` exists so article reads don't p
 - **Explicit override:** `data-umami-event-label="Epoc X"` on the element wins over auto-capture.
 - **Use explicit labels when** multiple buttons in one section share identical text but mean different things (View Specs ×4, Learn more ×3).
 
+## Component prop conventions
+
+Reusable components (cards, tiles, banners) must use standard prop names. Tracking overrides read these props — non-standard names force fragile fallback chains.
+
+| Content | Prop name | Example value |
+|---|---|---|
+| Heading | `title` | `Epoc X` |
+| Body copy | `description` | `14-Channel professional EEG...` |
+| Button/CTA text | `label` | `View Specs` |
+| Link target | `link` | `./epoc-x` |
+| Image | `image` | `epoc-x.png` |
+| Badge/pill | `badge` | `Best seller` |
+
+Rules:
+
+1. **camelCase, no spaces, no "text" suffix.** `title` not `label text` or `title text`. Spaces force `props["label text"]` — ugly, error-prone.
+2. **One name per role.** Heading is always `title`, never `heading`/`productName`/`label text` depending on mood.
+3. **`label` = button text only.** The tracking label comes from `title` (what the card IS), not `label` (what the button SAYS).
+4. **Tracking overrides read `props.title`.** `trackProduct` uses `props.title || "Product"`. No chains, no guessing.
+5. **New component → copy the convention, don't invent.** If a card needs a new field, extend the table above, don't improvise.
+
+Why: prop-reading overrides are the only way to track reusable components when instances can't be selected individually (component-in-slider). The convention makes `props.title` always correct.
+
 ## Anti-patterns
 
 | Anti-pattern | Why it fails |

@@ -48,7 +48,7 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 
-**Product label variants** (same `product` section, explicit labels): `trackProductEpocX` (Epoc X), `trackProductMN8` (MN8), `trackProductFlex` (Flex 2.0), `trackProductInsight` (Insight) — static exports because Framer picker only lists `(Component) => Component` signatures; labels hardcoded since button text is identical across cards.
+**Product label variants** (same `product` section, explicit labels): `trackProduct` reads `props.title` — label = product name per instance. Apply once on card root inside component definition. Requires prop convention: heading prop = `title` (see `RULES.md`).
 
 Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
 
