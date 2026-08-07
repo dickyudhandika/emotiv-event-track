@@ -17,6 +17,11 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 ### Available values (EMOTIV)
 
+**Column legend:**
+- **Value** — the `section` prop sent to Umami. Lowercase, single word, stable forever.
+- **Role** — the layout function of the region (what it does in the page flow). The question the value answers.
+- **Event** — the action verb sent as the event name. Conversion vs content vs form.
+
 | # | Value | Role | Pages | Example CTAs | Event |
 |---|---|---|---|---|---|
 | 1 | `nav` | global navigation | all | Shop Now | `cta_click` |
