@@ -73,6 +73,13 @@ Keep the event vocabulary small. `content_click` exists so article reads don't p
 ## Labels
 
 - **Auto-capture:** the global listener grabs button text: `if (!data.label) data.label = (umamiEl.textContent || '').trim().slice(0, 40)`
+- **Framer dedupe (required):** Framer renders button labels twice (visible + aria-hidden), so `textContent` yields `"Shop NowShop Now"`. Dedupe **before** slicing — the duplicate is cut mid-string if you slice first:
+  ```js
+  let label = (umamiEl.textContent || '').trim()
+  label = label.replace(/(.{3,})\1/g, '$1') // collapse doubled visible+aria text
+  if (!data.label) data.label = label.slice(0, 40)
+  ```
+  Result: `"Shop NowShop Now"` → `"Shop Now"`. `(.{3,})` min length avoids false collapses on short repeats.
 - **Explicit override:** `data-umami-event-label="Epoc X"` on the element wins over auto-capture.
 - **Use explicit labels when** multiple buttons in one section share identical text but mean different things (View Specs ×4, Learn more ×3).
 

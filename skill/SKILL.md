@@ -79,6 +79,12 @@ Role missing + won't compare?    → fold into nearest value, label differentiat
 ## Labels
 
 - Auto-capture: `if (!data.label) data.label = (umamiEl.textContent || '').trim().slice(0, 40)`
+- **Framer dedupe (required):** Framer renders labels twice (visible + aria-hidden) → `"Shop NowShop Now"`. Dedupe **before** slice, else the duplicate is cut mid-string:
+  ```js
+  let label = (umamiEl.textContent || '').trim()
+  label = label.replace(/(.{3,})\1/g, '$1') // collapse doubled visible+aria text
+  if (!data.label) data.label = label.slice(0, 40)
+  ```
 - Explicit override: `data-umami-event-label="Epoc X"` wins over auto-capture.
 - Use explicit labels when multiple buttons in one section share identical text but mean different things.
 

@@ -38,18 +38,24 @@ Values: 21
 | `trackHowItWorks` | `howitworks` | `cta_click` | how-it-works sections |
 | `trackFaq` | `faq` | `faq_toggle` | FAQ accordions |
 
-## Product label variants (same `product` section, explicit labels)
+## Accordion cards (`applications`)
 
-`trackProduct` reads `props.title` — label = product name per instance. Apply once on the card root inside the component definition; every instance's own `title` flows through.
+"Versatile by design" is an accordion — 4 card rows, one expanded at a time, each expanding card has a distinct CTA button. **Plant `trackApplications` (`cta_click`) on the button (`with Link` layer) only, not the card root `Container`** — planting on root risks double-fire via `closest()`.
 
-| Instance title | Resulting label |
+| Card | Button (auto-captured label) |
 |---|---|
-| `Epoc X` | Epoc X |
-| `MN8` | MN8 |
-| `Flex 2.0` | Flex 2.0 |
-| `Insight` | Insight |
+| Access Research Hub | Access Research Hub |
+| The End of Guessing | Unlock Consumer Insights |
+| Master Your Mind | Start Your Wellness Journey |
+| Build with Sentience | Start Building |
 
-Requires the component prop convention: heading prop must be `title` (see `RULES.md`).
+Only the expanded card shows its button, so the event fires on the open card's CTA — correct `cta_click` intent. Collapsed-card click that opens a card isn't tracked (no button yet).
+
+## Product label variants (same `product` section)
+
+Product identity comes from **auto-capture with Framer dedupe** — `trackProduct` injects event + section only, and the global listener derives the label from the card's deduped text (name leads the card, so `Epoc X`, `MN8`, `Flex 2.0`, `Insight` are distinct). See `RULES.md` → Labels → Framer dedupe.
+
+If auto-capture's combined text is undesirable, set an explicit `data-umami-event-label="Epoc X"` per card instance in Framer (wins over auto-capture).
 
 ## Notes
 

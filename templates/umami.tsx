@@ -53,14 +53,12 @@ export function trackBanner(Component: ComponentType): ComponentType {
 
 export function trackProduct(Component: ComponentType): ComponentType {
     return forwardRef((props, ref) => {
-        const label = props.title || "Product"
         return (
             <Component
                 ref={ref}
                 {...props}
                 data-umami-event="cta_click"
                 data-umami-event-section="product"
-                data-umami-event-label={label}
             />
         )
     })
