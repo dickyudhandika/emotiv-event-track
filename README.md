@@ -52,6 +52,8 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
 
+Per-element wiring (what's planted where): [`WIRING.md`](WIRING.md).
+
 ## Why it matters
 
 - **Cross-page comparison** — `section=hero` means the same thing on every page. Numbers or per-page names break this.
@@ -64,6 +66,7 @@ Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
 emotiv-event-track/
 ├── README.md                    # this file
 ├── RULES.md                     # the rules, human-readable
+├── WIRING.md                    # what's planted where (per page)
 ├── skill/
 │   └── SKILL.md                 # same rules, agent-executable (any harness)
 ├── vocabularies/
