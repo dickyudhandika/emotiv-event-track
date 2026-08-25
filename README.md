@@ -54,6 +54,8 @@ Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
 
 Per-element wiring (what's planted where): [`WIRING.md`](WIRING.md).
 
+Neuroscience blog A/B banner tracking (Custom Code script, verified live): [`NEUROSCIENCE.md`](NEUROSCIENCE.md).
+
 ## Why it matters
 
 - **Cross-page comparison** — `section=hero` means the same thing on every page. Numbers or per-page names break this.
@@ -67,6 +69,7 @@ emotiv-event-track/
 ├── README.md                    # this file
 ├── RULES.md                     # the rules, human-readable
 ├── WIRING.md                    # what's planted where (per page)
+├── NEUROSCIENCE.md              # neuroscience blog A/B banner tracking (verified)
 ├── skill/
 │   └── SKILL.md                 # same rules, agent-executable (any harness)
 ├── vocabularies/
