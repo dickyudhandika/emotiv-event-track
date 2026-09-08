@@ -1,8 +1,9 @@
 # Vocabulary: EMOTIV
 
 Site: https://www.emotiv.com
-Updated: 2026-08-07
-Values: 21
+Updated: 2026-09-08
+Section values: 22 (snackbar added)
+Product values: 8
 
 ## Vocabulary
 
@@ -29,6 +30,24 @@ Values: 21
 | 19 | `community` | developer Learn & Connect | /developer | Explore, Go to Github | `content_click` |
 | 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
 | 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
+| 22 | `snackbar` | floating promo banner | all | MN8 bundle promo | `cta_click` |
+
+## Product vocabulary (2026-09-08)
+
+`product` = WHAT the click is about (product identity). `section` = WHERE it happened. Page = free via URL path filter. Applied via per-product static exports (`track<Section><Product>`) — wire the product-variant export instead of the plain one; section value stays identical so dashboards remain comparable.
+
+| # | Value | Identity | Appears on |
+|---|---|---|---|
+| 1 | `epoc_x` | EPOC X headset | hero/nav/footer/product-section everywhere |
+| 2 | `epoc_x_pro` | EPOC X PRO headset | same |
+| 3 | `mn8` | MN8 ear-EEG (incl. studio bundle promo — product identity wins) | same + snackbar |
+| 4 | `flex` | Flex 2 headset | same |
+| 5 | `insight` | Insight 5-channel headset | same |
+| 6 | `emotivpro` | EMOTIVPRO software | same |
+| 7 | `insight_charging_cable` | Insight accessory | /insight accessories row |
+| 8 | `insight_sensor_tips` | Insight accessory | /insight accessories row |
+
+Rules: values match page slugs, underscored. Accessories get own slugs (distinct shop SKUs, separate demand signal) — prefixed with parent product. Bundle promos map to the product, not the bundle name.
 
 ## Legacy (kept for other pages, not in count)
 

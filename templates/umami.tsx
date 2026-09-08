@@ -7,10 +7,30 @@ import { forwardRef, type ComponentType } from "react"
 // Label disambiguates within a section. Event name = action verb only.
 // Values: nav, hero, banner, applications, pathway, platform, product, news,
 //         footer, productnav, features, casestudies, testimonials, leadmagnet,
-//         specs, usecases, gettingstarted, tiers, community, download, footernav
+//         specs, usecases, gettingstarted, tiers, community, download, footernav,
+//         snackbar
 // Legacy: pricing, howitworks, faq
+//
+// Product vocabulary (2026-09-08): product = WHAT they clicked (product identity).
+// Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro,
+//         accessories: insight_charging_cable, insight_sensor_tips
+// Model: product = what, section = where, URL path filter = which page (free in Umami).
+// Per-product exports are STATIC (no string-arg factories — invisible to Framer picker).
 
 // ── Global / shared ──────────────────────────────────────────────────────────
+
+export function trackSnackbar(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="snackbar"
+            />
+        )
+    })
+}
 
 export function trackNav(Component: ComponentType): ComponentType {
     return forwardRef((props, ref) => {
@@ -331,6 +351,459 @@ export function trackFooterNav(Component: ComponentType): ComponentType {
                 {...props}
                 data-umami-event="content_click"
                 data-umami-event-section="footernav"
+            />
+        )
+    })
+}
+
+// ── Product property (2026-09-08) ─────────────────────────────────────────────
+// cta_click/content_click + product=<slug>. Static per-product exports — wire on
+// the instance. Section matches the plain export of the same section so existing
+// dashboards stay comparable; the product prop adds the dimension.
+
+// Product page heroes (Phase 1 + 3) — replaces plain trackHero on product pages
+
+export function trackHeroInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackHeroEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackHeroEpocXPro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="epoc_x_pro"
+            />
+        )
+    })
+}
+
+export function trackHeroMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+export function trackHeroFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackHeroEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+
+// Product sub-navs (Phase 1 + 3) — replaces plain trackProductNav on product pages
+
+export function trackProductNavInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackProductNavEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackProductNavEpocXPro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="epoc_x_pro"
+            />
+        )
+    })
+}
+
+export function trackProductNavMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+export function trackProductNavFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackProductNavEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+
+// Nav dropdown product links (Phase 2) — currently untracked anywhere on the site
+
+export function trackNavEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackNavEpocXPro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="epoc_x_pro"
+            />
+        )
+    })
+}
+
+export function trackNavMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+export function trackNavFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackNavInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackNavEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="nav"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+
+// Footer nav product links (Phase 2) — adds product to existing footernav events
+
+export function trackFooterNavEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackFooterNavEpocXPro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="epoc_x_pro"
+            />
+        )
+    })
+}
+
+export function trackFooterNavMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+export function trackFooterNavFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackFooterNavInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackFooterNavEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="footernav"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+
+// Homepage hero carousel "See X" (Variant B) — replaces plain trackProduct there
+
+export function trackProductSeeEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackProductSeeInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackProductSeeMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+export function trackProductSeeFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+// /insight accessory cards — replaces plain trackProduct on those two cards
+
+export function trackProductInsightChargingCable(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="insight_charging_cable"
+            />
+        )
+    })
+}
+
+export function trackProductInsightSensorTips(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="insight_sensor_tips"
+            />
+        )
+    })
+}
+
+// Snackbar promo — adds product to the existing snackbar event
+
+export function trackSnackbarMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="snackbar"
+                data-umami-event-product="mn8"
             />
         )
     })
