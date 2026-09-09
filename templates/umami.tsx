@@ -11,8 +11,11 @@ import { forwardRef, type ComponentType } from "react"
 //         snackbar, accessories
 // Legacy: pricing, howitworks, faq
 //
-// Product vocabulary (2026-09-08): product = WHAT they clicked (product identity).
-// Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro
+// Product vocabulary (2026-09-08, rev 2): product = WHAT they clicked (product
+// identity). Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro.
+// GLOBAL/shared components (nav, footer, footernav, snackbar) NEVER carry
+// product — they stay section-only everywhere. Product only on page-local
+// content (hero, productnav, accessories, homepage carousel).
 // Accessories: section=accessories + product=parent (e.g. epoc_x) — label
 // differentiates the item. NO accessory product slugs.
 // Model: product = what, section = where, URL path filter = which page (free in Umami).
@@ -534,178 +537,6 @@ export function trackProductNavEmotivpro(Component: ComponentType): ComponentTyp
     })
 }
 
-// Nav dropdown product links (Phase 2) — currently untracked anywhere on the site
-
-export function trackNavEpocX(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="epoc_x"
-            />
-        )
-    })
-}
-
-export function trackNavEpocXPro(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="epoc_x_pro"
-            />
-        )
-    })
-}
-
-export function trackNavMn8(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="mn8"
-            />
-        )
-    })
-}
-
-export function trackNavFlex(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="flex"
-            />
-        )
-    })
-}
-
-export function trackNavInsight(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="insight"
-            />
-        )
-    })
-}
-
-export function trackNavEmotivpro(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="nav"
-                data-umami-event-product="emotivpro"
-            />
-        )
-    })
-}
-
-// Footer nav product links (Phase 2) — adds product to existing footernav events
-
-export function trackFooterNavEpocX(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="epoc_x"
-            />
-        )
-    })
-}
-
-export function trackFooterNavEpocXPro(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="epoc_x_pro"
-            />
-        )
-    })
-}
-
-export function trackFooterNavMn8(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="mn8"
-            />
-        )
-    })
-}
-
-export function trackFooterNavFlex(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="flex"
-            />
-        )
-    })
-}
-
-export function trackFooterNavInsight(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="insight"
-            />
-        )
-    })
-}
-
-export function trackFooterNavEmotivpro(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="content_click"
-                data-umami-event-section="footernav"
-                data-umami-event-product="emotivpro"
-            />
-        )
-    })
-}
-
 // Homepage hero carousel "See X" (Variant B) — replaces plain trackProduct there
 
 export function trackProductSeeEpocX(Component: ComponentType): ComponentType {
@@ -764,11 +595,6 @@ export function trackProductSeeFlex(Component: ComponentType): ComponentType {
     })
 }
 
-
-
-
-
-
 // Accessory cards on product pages (2026-09-08, QA'd model) — section=accessories
 // (own region role), product=parent ecosystem; label differentiates the item.
 // Replaces plain trackProduct on accessory cards.
@@ -814,18 +640,3 @@ export function trackAccessoriesInsight(Component: ComponentType): ComponentType
     })
 }
 
-// Snackbar promo — adds product to the existing snackbar event
-
-export function trackSnackbarMn8(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="snackbar"
-                data-umami-event-product="mn8"
-            />
-        )
-    })
-}

@@ -9,7 +9,7 @@ Current page traffic: 90d pageviews 9,705 (Umami, website `338c5f5a`).
 | 1 | `nav` | global navigation (shared comp) | header | Shop Now, Start Now | `cta_click` | ✅ live |
 | 2 | `footer` | footer band CTAs (shared) | footer | User & Product Research, Academic Research | `cta_click` | ✅ live |
 | 3 | `footernav` | footer link columns (shared) | footer | Academic Research, Epoc X, KB | `content_click` | ✅ live |
-| 4 | `snackbar` | floating promo banner (shared) | bottom overlay | MN8 bundle promo | `cta_click` | ✅ live |
+| 4 | `snackbar` | floating promo banner (GLOBAL — no product by rule) | bottom overlay | MN8 bundle promo | `cta_click` | ✅ live |
 | 5 | `hero` | first fold buy CTAs | hero (desktop ×2 + mobile ×2) | Buy, Buy Emotiv Epoc X, Buy now | `cta_click` + `product=epoc_x` | ❌ wire `trackHeroEpocX` |
 | 6 | `productnav` | product sub-nav anchors | sticky sub-nav | Case studies, EmotivPRO, Tech Specs | `cta_click` + `product=epoc_x` | ❌ wire `trackProductNavEpocX` |
 | 7 | `accessories` | accessory cross-sell cards | accessories row | Rubber Comfort Pads, USB Receiver Universal | `cta_click` + `product=epoc_x` | 🟡 rewire `trackAccessoriesEpocX` (tracked today as `product` section, no product prop) |

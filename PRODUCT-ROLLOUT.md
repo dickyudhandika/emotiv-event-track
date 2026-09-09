@@ -21,7 +21,7 @@ Current state: hero + sub-nav **untracked entirely**; accessories/snackbar track
 |---|---|---|---|
 | 1 | Hero "Pre-order" button → `shop.emotiv.com/insight` (layer under `Hero - old`, all breakpoint variants) | **NEW plant** | `data-umami-event` = `cta_click`<br>`data-umami-event-section` = `hero`<br>`data-umami-event-product` = `insight` |
 | 2 | Product sub-nav anchor links (`Overview`, `Features`, … → `./insight#features` etc.) | **NEW plant** | `data-umami-event` = `cta_click`<br>`data-umami-event-section` = `productnav`<br>`data-umami-event-product` = `insight` |
-| 3 | Accessory card → `./insight-charging-cable` (already tracked) | rewire | `trackAccessoriesInsight` → `cta_click` + `section=accessories` + `product=insight` |
+| 3 | Accessory card → `./insight-charging-cable` (already tracked) | rewire | `trackAccessoriesInsight` |
 | 4 | Accessory card → `./insight-sensor-tips` (already tracked) | rewire | `trackAccessoriesInsight` |
 | 5 | Snackbar promo → shop `mn8-studio-annual-non-commercial-bundle` (already tracked) | add prop | + `data-umami-event-product` = `mn8` ⚠️ pending decision |
 
@@ -48,7 +48,7 @@ Repeat phase-1 rows 1–2 pattern on `/epoc-x`, `/epoc-x-pro`, `/mn8`, `/flex`, 
 | Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
 | Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
 | Cross-sell cards (other products) | DEFERRED — not in /epoc-x scope (2026-09-08: focus epoc-x first) | ⚠️ untouched |
-| Snackbar MN8 bundle (×5) | `trackSnackbarMn8` | ⚠️ tracked, no product prop |
+| Snackbar MN8 bundle (×5) | GLOBAL — stays `trackSnackbar`, no product (rev 2) | ✅ correct as-is |
 | Nav/footer product links | phase 2 (shared components) | ❌ untracked |
 
 Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×2) button variants — wire all 4. Accessory names in Framer use `<a name="Flex Saline Sensors">` wrappers (stale name attr, harmless).
@@ -79,10 +79,8 @@ Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×
 |---|---|---|---|
 | Product heroes | `trackHeroInsight/EpocX/EpocXPro/Mn8/Flex/Emotivpro` | `hero` | per product |
 | Product sub-navs | `trackProductNavInsight/…` ×6 | `productnav` | per product |
-| Nav dropdown | `trackNavEpocX/…` ×6 | `nav` | per product (NEW — nav product links were untracked) |
-| Footer nav | `trackFooterNavEpocX/…` ×6 | `footernav` | per product |
 | Hero carousel (Var B) | `trackProductSeeEpocX/Insight/Mn8/Flex` ×4 | `product` | per product |
 | Accessories (any product page) | `trackAccessories` (plain), `trackAccessoriesEpocX`, `trackAccessoriesInsight` | `accessories` | parent product (label names the item) |
-| Snackbar | `trackSnackbarMn8` | `snackbar` | `mn8` |
+| Nav/Footer/Snackbar (global) | REMOVED 2026-09-09 (rev 2) — global components never carry product | — | — |
 
 Wire the product-variant export INSTEAD of the plain one (same section value → dashboards stay comparable).

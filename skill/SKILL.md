@@ -20,9 +20,12 @@ Assign `section` values to Umami custom events on a website. The vocabulary is a
 | Dimension | Who sets it | Example |
 |---|---|---|
 | Action | event name | `cta_click`, `form_submit`, `faq_toggle` |
-| Section | prop (this repo) | `hero`, `nav`, `tiers` |
+| Section | prop (this repo) | `hero`, `nav`, `tiers`, `accessories` |
+| Product | prop (this repo) | `epoc_x`, `insight`, `mn8` — see Product prop below |
 | Page | Umami auto (`url`) | `/`, `/pricing` |
 | Button | `label` (listener auto-captures text) | `Buy`, `Start free trial` |
+
+**Product prop (rev 2, 2026-09-09): `product` = WHAT the click is about — page-local content ONLY.** Global/shared components (nav, footer, footernav, snackbar) NEVER carry product: they are ONE component reused on every page, so a product value would be false on all but one page. Globals stay section-only; page attribution comes free from Umami's URL Path filter. Page-local content (hero, productnav, accessories, homepage carousel) carries `product=<slug>` when it points at a product. Values: 6 core slugs (`epoc_x`, `epoc_x_pro`, `mn8`, `flex`, `insight`, `emotivpro`) — accessories use `section=accessories` + `product=<parent>`, never their own slug; the auto-captured label names the item.
 
 ## Terms
 
@@ -105,4 +108,11 @@ const _t = window.umami.track;
 window.umami.track = (n, p) => (_spy.push({ n, p }), _t(n, p));
 ```
 
-Click a tracked button → `_spy` shows `{ n: "cta_click", p: { section: "hero", label: "Buy" } }` + a 2nd `api/send` in Network tab (first = pageview).
+Click a tracked button → `_spy` shows `{ n: "cta_click", p: { section: "hero", label: "Buy" } }` (page-local product CTA adds `product: "epoc_x"`) + a 2nd `api/send` in Network tab (first = pageview).
+
+**Live re-verify after wiring** (server HTML, cache-busted):
+```bash
+curl -sL "https://www.emotiv.com/<page>?v=N" | grep -o 'data-umami-event-product="[^"]*"' | sort | uniq -c
+curl -sL "https://www.emotiv.com/<page>?v=N" | grep -o 'data-umami-event-section="[^"]*"' | sort | uniq -c
+```
+Expect: product only on page-local sections (hero/productnav/accessories); global sections (nav/footer/snackbar) present with NO product. Check for double-tracking: same element carrying both old and new overrides fires twice with different sections.

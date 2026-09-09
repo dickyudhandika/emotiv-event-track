@@ -33,20 +33,22 @@ Product values: 6
 | 22 | `snackbar` | floating promo banner | all | MN8 bundle promo | `cta_click` |
 | 23 | `accessories` | accessory cross-sell cards | product pages (epoc-x, insight, …) | accessory card clicks | `cta_click` |
 
-## Product vocabulary (2026-09-08)
+## Product vocabulary (2026-09-08, rev 2 — QA'd)
 
-`product` = WHAT the click is about (product identity). `section` = WHERE it happened. Page = free via URL path filter. Applied via per-product static exports (`track<Section><Product>`) — wire the product-variant export instead of the plain one; section value stays identical so dashboards remain comparable.
+`product` = WHAT the click is about (product identity). `section` = WHERE it happened. Page = free via URL path filter. Applied via per-product static exports (`track<Section><Product>`).
+
+**Rule: product prop is for PAGE-LOCAL content only (hero, productnav, accessories, homepage carousel). GLOBAL/shared components — nav, footer, footernav, snackbar — NEVER carry product** (they're one component across all pages; a product value would be a lie on every other page). Globals stay section-only, product answered via URL Path filter.
 
 | # | Value | Identity | Appears on |
 |---|---|---|---|
-| 1 | `epoc_x` | EPOC X headset | hero/nav/footer/product-section everywhere |
-| 2 | `epoc_x_pro` | EPOC X PRO headset | same |
-| 3 | `mn8` | MN8 ear-EEG (incl. studio bundle promo — product identity wins) | same + snackbar |
-| 4 | `flex` | Flex 2 headset | same |
-| 5 | `insight` | Insight 5-channel headset | same |
-| 6 | `emotivpro` | EMOTIVPRO software | same |
+| 1 | `epoc_x` | EPOC X headset | hero, productnav, accessories, product-section |
+| 2 | `epoc_x_pro` | EPOC X PRO headset | hero, productnav |
+| 3 | `mn8` | MN8 ear-EEG | hero, productnav |
+| 4 | `flex` | Flex 2 headset | hero, productnav |
+| 5 | `insight` | Insight 5-channel headset | hero, productnav, accessories |
+| 6 | `emotivpro` | EMOTIVPRO software | hero, productnav |
 
-Rules: values match page slugs, underscored — 6 core products only. Accessories do NOT get product slugs: they fire `section=accessories` + `product=<parent>` and the auto-captured label names the item ("Rubber Comfort Pads", "USB Receiver"). Bundle promos map to the product, not the bundle name.
+Rules: values match page slugs, underscored — 6 core products only. Accessories do NOT get product slugs: they fire `section=accessories` + `product=<parent>` and the auto-captured label names the item. Bundle promos map to the product, not the bundle name. Snackbar bundle promo stays section-only (global component).
 
 ## Legacy (kept for other pages, not in count)
 
