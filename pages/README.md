@@ -4,9 +4,9 @@ Per-page Umami event coverage, one file per page, same table shape as `vocabular
 
 | Page | URL | File | Status | Backing |
 |---|---|---|---|---|
-| Homepage | `/` | [homepage.md](homepage.md) | ✅ live (2026-08-11, both A/B variants) | `WIRING.md` |
+| Homepage | `/` | [homepage.md](homepage.md) | ✅ live — control route (A/B ended 2026-09-09; Variant B retired, history in A/B log) | `WIRING.md` |
 | Neuroscience article | `/neuroscience/theta-waves-benefits` | [neuroscience.md](neuroscience.md) | ✅ live (2026-08-25, both variants) | `NEUROSCIENCE.md` |
-| EPOC X | `/epoc-x` | [epoc-x.md](epoc-x.md) | 🟡 planned (hero, sub-nav, accessories) | `PRODUCT-ROLLOUT.md` |
+| EPOC X | `/epoc-x` | [epoc-x.md](epoc-x.md) | ✅ live (2026-09-09, product-prop rollout) | `PRODUCT-ROLLOUT.md` |
 | Insight | `/insight` | [insight.md](insight.md) | 🟡 planned (hero, sub-nav, accessories) | `PRODUCT-ROLLOUT.md` |
 
 Not audited yet: `/epoc-x-pro`, `/mn8`, `/flex`, `/emotivpro`, solution pages, blog index, knowledge base. Shared sections (`nav`/`footer`/`footernav`/`snackbar`) already live there — see `vocabularies/emotiv.md`; page-specific wiring unmapped.

@@ -31,8 +31,8 @@ Current state: hero + sub-nav **untracked entirely**; accessories/snackbar track
 |---|---|---|---|
 | 6 | Nav dropdown product links: Epoc X, Epoc X PRO, MN8, Flex, Insight, EmotivPRO (currently **untracked**) | NEW plant inside nav component | `cta_click` + `section=nav` + `product=<slug>` per link |
 | 7 | Footer nav product column links (Epoc X, MN8, Flex, Insight, EmotivPRO — already `content_click` `footernav`) | add prop inside footer component | + `product=<slug>` per link |
-| 8 | Homepage hero carousel "See X" buttons (Variant B) — separate button instances | add prop per button | + `product=<slug>` |
-| 9 | Homepage product slider cards | ⚠️ **BLOCKED for attributes** — one shared component, per-instance attributes impossible (same blocker as clean labels, WIRING.md). Options: (a) skip — rely on auto-capture label, (b) per-product override exports (`trackProductEpocX` …) = the 2nd mechanism we rejected, (c) split into per-product components. **Decision needed.** |
+| 8 | ~~Homepage hero carousel "See X" buttons (Variant B)~~ — **RETIRED 2026-09-09** (A/B ended, control won; Variant B route no longer served) | — | see A/B log in `WIRING.md` / `pages/homepage.md` |
+| 9 | Homepage product slider cards | ⚠️ **BLOCKED for attributes** — one shared component, per-instance attributes impossible. **2026-09-09 decision: homepage carries NO `product` prop (rev-2)** — skip. Per-product `trackProductSee…` exports exist if a product carousel ever ships again. |
 
 ## Phase 3 — other product pages
 
@@ -42,14 +42,14 @@ Repeat phase-1 rows 1–2 pattern on `/epoc-x`, `/epoc-x-pro`, `/mn8`, `/flex`, 
 
 | Element (live HTML evidence) | Export to wire | Status today |
 |---|---|---|
-| Hero "Buy" + "Buy Emotiv Epoc X" (desktop, ×2 → `shop.emotiv.com/epoc-x/`) | `trackHeroEpocX` | ❌ untracked |
-| Hero "Buy now" ×2 (mobile variants) | `trackHeroEpocX` | ❌ untracked |
-| Sub-nav "Case studies" (`#casestudy`), "EmotivPRO" (`#emotivpro`), "Tech Specs" (`#techspec`) | `trackProductNavEpocX` | ❌ untracked |
-| Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
-| Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
-| Cross-sell cards (other products) | DEFERRED — not in /epoc-x scope (2026-09-08: focus epoc-x first) | ⚠️ untouched |
+| Hero "Buy" + "Buy Emotiv Epoc X" (desktop, ×2 → `shop.emotiv.com/epoc-x/`) | `trackHeroEpocX` | ✅ done (2026-09-09) |
+| Hero "Buy now" ×2 (mobile variants) | `trackHeroEpocX` | ✅ done (2026-09-09) |
+| Sub-nav "Case studies" (`#casestudy`), "EmotivPRO" (`#emotivpro`), "Tech Specs" (`#techspec`) | `trackProductNavEpocX` | ✅ done (2026-09-09) |
+| Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackAccessoriesEpocX` | ✅ done (2026-09-09) |
+| Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackAccessoriesEpocX` | ✅ done (2026-09-09) |
+| Cross-sell cards (other products) | DEFERRED — not in /epoc-x scope (2026-09-08: focus epoc-x first) | ⏸ deferred (cross-sell out of scope) |
 | Snackbar MN8 bundle (×5) | GLOBAL — stays `trackSnackbar`, no product (rev 2) | ✅ correct as-is |
-| Nav/footer product links | phase 2 (shared components) | ❌ untracked |
+| Nav/footer product links | phase 2 (shared components) | ❌ untracked — phase 2 pending |
 
 Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×2) button variants — wire all 4. Accessory names in Framer use `<a name="Flex Saline Sensors">` wrappers (stale name attr, harmless).
 
