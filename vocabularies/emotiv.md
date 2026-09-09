@@ -2,8 +2,8 @@
 
 Site: https://www.emotiv.com
 Updated: 2026-09-08
-Section values: 22 (snackbar added)
-Product values: 10
+Section values: 23 (snackbar, accessories added)
+Product values: 6
 
 ## Vocabulary
 
@@ -31,6 +31,7 @@ Product values: 10
 | 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
 | 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
 | 22 | `snackbar` | floating promo banner | all | MN8 bundle promo | `cta_click` |
+| 23 | `accessories` | accessory cross-sell cards | product pages (epoc-x, insight, …) | accessory card clicks | `cta_click` |
 
 ## Product vocabulary (2026-09-08)
 
@@ -44,12 +45,8 @@ Product values: 10
 | 4 | `flex` | Flex 2 headset | same |
 | 5 | `insight` | Insight 5-channel headset | same |
 | 6 | `emotivpro` | EMOTIVPRO software | same |
-| 7 | `insight_charging_cable` | Insight accessory | /insight accessories row |
-| 8 | `insight_sensor_tips` | Insight accessory | /insight accessories row |
-| 9 | `epoc_x_rubber_comfort_pads` | EPOC X accessory | /epoc-x accessories row |
-| 10 | `epoc_x_usb_receiver_universal` | EPOC X accessory | /epoc-x accessories row |
 
-Rules: values match page slugs, underscored. Accessories get own slugs (distinct shop SKUs, separate demand signal) — prefixed with parent product. Bundle promos map to the product, not the bundle name.
+Rules: values match page slugs, underscored — 6 core products only. Accessories do NOT get product slugs: they fire `section=accessories` + `product=<parent>` and the auto-captured label names the item ("Rubber Comfort Pads", "USB Receiver"). Bundle promos map to the product, not the bundle name.
 
 ## Legacy (kept for other pages, not in count)
 

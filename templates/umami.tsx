@@ -8,12 +8,13 @@ import { forwardRef, type ComponentType } from "react"
 // Values: nav, hero, banner, applications, pathway, platform, product, news,
 //         footer, productnav, features, casestudies, testimonials, leadmagnet,
 //         specs, usecases, gettingstarted, tiers, community, download, footernav,
-//         snackbar
+//         snackbar, accessories
 // Legacy: pricing, howitworks, faq
 //
 // Product vocabulary (2026-09-08): product = WHAT they clicked (product identity).
-// Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro,
-//         accessories: insight_charging_cable, insight_sensor_tips
+// Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro
+// Accessories: section=accessories + product=parent (e.g. epoc_x) — label
+// differentiates the item. NO accessory product slugs.
 // Model: product = what, section = where, URL path filter = which page (free in Umami).
 // Per-product exports are STATIC (no string-arg factories — invisible to Framer picker).
 
@@ -763,62 +764,51 @@ export function trackProductSeeFlex(Component: ComponentType): ComponentType {
     })
 }
 
-// /insight accessory cards — replaces plain trackProduct on those two cards
 
-export function trackProductInsightChargingCable(Component: ComponentType): ComponentType {
+
+
+
+
+// Accessory cards on product pages (2026-09-08, QA'd model) — section=accessories
+// (own region role), product=parent ecosystem; label differentiates the item.
+// Replaces plain trackProduct on accessory cards.
+
+export function trackAccessories(Component: ComponentType): ComponentType {
     return forwardRef((props, ref) => {
         return (
             <Component
                 ref={ref}
                 {...props}
                 data-umami-event="cta_click"
-                data-umami-event-section="product"
-                data-umami-event-product="insight_charging_cable"
+                data-umami-event-section="accessories"
             />
         )
     })
 }
 
-export function trackProductInsightSensorTips(Component: ComponentType): ComponentType {
+export function trackAccessoriesEpocX(Component: ComponentType): ComponentType {
     return forwardRef((props, ref) => {
         return (
             <Component
                 ref={ref}
                 {...props}
                 data-umami-event="cta_click"
-                data-umami-event-section="product"
-                data-umami-event-product="insight_sensor_tips"
+                data-umami-event-section="accessories"
+                data-umami-event-product="epoc_x"
             />
         )
     })
 }
 
-
-// /epoc-x accessory cards — replaces plain trackProduct on those cards (2026-09-08)
-
-export function trackProductEpocXRubberComfortPads(Component: ComponentType): ComponentType {
+export function trackAccessoriesInsight(Component: ComponentType): ComponentType {
     return forwardRef((props, ref) => {
         return (
             <Component
                 ref={ref}
                 {...props}
                 data-umami-event="cta_click"
-                data-umami-event-section="product"
-                data-umami-event-product="epoc_x_rubber_comfort_pads"
-            />
-        )
-    })
-}
-
-export function trackProductEpocXUsbReceiverUniversal(Component: ComponentType): ComponentType {
-    return forwardRef((props, ref) => {
-        return (
-            <Component
-                ref={ref}
-                {...props}
-                data-umami-event="cta_click"
-                data-umami-event-section="product"
-                data-umami-event-product="epoc_x_usb_receiver_universal"
+                data-umami-event-section="accessories"
+                data-umami-event-product="insight"
             />
         )
     })

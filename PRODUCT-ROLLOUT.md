@@ -21,8 +21,8 @@ Current state: hero + sub-nav **untracked entirely**; accessories/snackbar track
 |---|---|---|---|
 | 1 | Hero "Pre-order" button → `shop.emotiv.com/insight` (layer under `Hero - old`, all breakpoint variants) | **NEW plant** | `data-umami-event` = `cta_click`<br>`data-umami-event-section` = `hero`<br>`data-umami-event-product` = `insight` |
 | 2 | Product sub-nav anchor links (`Overview`, `Features`, … → `./insight#features` etc.) | **NEW plant** | `data-umami-event` = `cta_click`<br>`data-umami-event-section` = `productnav`<br>`data-umami-event-product` = `insight` |
-| 3 | Accessory card → `./insight-charging-cable` (section `product`, already tracked) | add prop | + `data-umami-event-product` = `insight_charging_cable` ⚠️ pending decision |
-| 4 | Accessory card → `./insight-sensor-tips` (already tracked) | add prop | + `data-umami-event-product` = `insight_sensor_tips` ⚠️ pending decision |
+| 3 | Accessory card → `./insight-charging-cable` (already tracked) | rewire | `trackAccessoriesInsight` → `cta_click` + `section=accessories` + `product=insight` |
+| 4 | Accessory card → `./insight-sensor-tips` (already tracked) | rewire | `trackAccessoriesInsight` |
 | 5 | Snackbar promo → shop `mn8-studio-annual-non-commercial-bundle` (already tracked) | add prop | + `data-umami-event-product` = `mn8` ⚠️ pending decision |
 
 ## Phase 2 — shared components (one edit, all pages)
@@ -45,9 +45,9 @@ Repeat phase-1 rows 1–2 pattern on `/epoc-x`, `/epoc-x-pro`, `/mn8`, `/flex`, 
 | Hero "Buy" + "Buy Emotiv Epoc X" (desktop, ×2 → `shop.emotiv.com/epoc-x/`) | `trackHeroEpocX` | ❌ untracked |
 | Hero "Buy now" ×2 (mobile variants) | `trackHeroEpocX` | ❌ untracked |
 | Sub-nav "Case studies" (`#casestudy`), "EmotivPRO" (`#emotivpro`), "Tech Specs" (`#techspec`) | `trackProductNavEpocX` | ❌ untracked |
-| Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackProductEpocXRubberComfortPads` | ⚠️ tracked, no product prop |
-| Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackProductEpocXUsbReceiverUniversal` | ⚠️ tracked, no product prop |
-| Cross-sell: Insight charging cable + sensor tips cards (tracked, from shared accessories row) | keep existing / rewire to `trackProductInsightChargingCable` / `trackProductInsightSensorTips` | ⚠️ tracked, no product prop |
+| Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
+| Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackAccessoriesEpocX` | ⚠️ tracked, rewire to accessories model |
+| Cross-sell cards (other products) | DEFERRED — not in /epoc-x scope (2026-09-08: focus epoc-x first) | ⚠️ untouched |
 | Snackbar MN8 bundle (×5) | `trackSnackbarMn8` | ⚠️ tracked, no product prop |
 | Nav/footer product links | phase 2 (shared components) | ❌ untracked |
 
@@ -69,11 +69,11 @@ Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×
 
 | # | Question | Decision |
 |---|---|---|
-| D1 | Accessory values | ✅ Own slugs: `insight_charging_cable`, `insight_sensor_tips` |
+| D1 | Accessory values | REVISED 2026-09-08 (user QA): **`section=accessories` + `product=parent`**, label names the item. No accessory product slugs. ~~own slugs~~ |
 | D2 | Snackbar mn8-bundle value | ✅ `mn8` |
 | D3 | Slider cards | ✅ Skip for now — but note: with overrides (per-instance wiring) the shared-component blocker is GONE. Per-product `trackProduct…` exports can be wired on each slider card instance later if clean product counts are wanted. |
 
-## New exports in templates/umami.tsx (2026-09-08, 31 added → 57 total)
+## New exports in templates/umami.tsx (2026-09-08, see file — accessory exports consolidated 2026-09-08)
 
 | Group | Exports | Section | Product |
 |---|---|---|---|
@@ -82,7 +82,7 @@ Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×
 | Nav dropdown | `trackNavEpocX/…` ×6 | `nav` | per product (NEW — nav product links were untracked) |
 | Footer nav | `trackFooterNavEpocX/…` ×6 | `footernav` | per product |
 | Hero carousel (Var B) | `trackProductSeeEpocX/Insight/Mn8/Flex` ×4 | `product` | per product |
-| /insight accessories | `trackProductInsightChargingCable`, `trackProductInsightSensorTips` | `product` | accessory slugs |
+| Accessories (any product page) | `trackAccessories` (plain), `trackAccessoriesEpocX`, `trackAccessoriesInsight` | `accessories` | parent product (label names the item) |
 | Snackbar | `trackSnackbarMn8` | `snackbar` | `mn8` |
 
 Wire the product-variant export INSTEAD of the plain one (same section value → dashboards stay comparable).
