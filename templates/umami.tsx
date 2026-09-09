@@ -793,6 +793,37 @@ export function trackProductInsightSensorTips(Component: ComponentType): Compone
     })
 }
 
+
+// /epoc-x accessory cards — replaces plain trackProduct on those cards (2026-09-08)
+
+export function trackProductEpocXRubberComfortPads(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="epoc_x_rubber_comfort_pads"
+            />
+        )
+    })
+}
+
+export function trackProductEpocXUsbReceiverUniversal(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="product"
+                data-umami-event-product="epoc_x_usb_receiver_universal"
+            />
+        )
+    })
+}
+
 // Snackbar promo — adds product to the existing snackbar event
 
 export function trackSnackbarMn8(Component: ComponentType): ComponentType {

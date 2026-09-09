@@ -38,6 +38,21 @@ Current state: hero + sub-nav **untracked entirely**; accessories/snackbar track
 
 Repeat phase-1 rows 1–2 pattern on `/epoc-x`, `/epoc-x-pro`, `/mn8`, `/flex`, `/emotivpro` (hero buttons + sub-nav + related accessory cards).
 
+### `/epoc-x` mapping (2026-09-08, live-HTML verified)
+
+| Element (live HTML evidence) | Export to wire | Status today |
+|---|---|---|
+| Hero "Buy" + "Buy Emotiv Epoc X" (desktop, ×2 → `shop.emotiv.com/epoc-x/`) | `trackHeroEpocX` | ❌ untracked |
+| Hero "Buy now" ×2 (mobile variants) | `trackHeroEpocX` | ❌ untracked |
+| Sub-nav "Case studies" (`#casestudy`), "EmotivPRO" (`#emotivpro`), "Tech Specs" (`#techspec`) | `trackProductNavEpocX` | ❌ untracked |
+| Accessory card → `./epoc-x-rubber-comfort-pads` (×2, tracked `product` section) | `trackProductEpocXRubberComfortPads` | ⚠️ tracked, no product prop |
+| Accessory card → `./epoc-x-usb-receiver-universal` (×2, tracked) | `trackProductEpocXUsbReceiverUniversal` | ⚠️ tracked, no product prop |
+| Cross-sell: Insight charging cable + sensor tips cards (tracked, from shared accessories row) | keep existing / rewire to `trackProductInsightChargingCable` / `trackProductInsightSensorTips` | ⚠️ tracked, no product prop |
+| Snackbar MN8 bundle (×5) | `trackSnackbarMn8` | ⚠️ tracked, no product prop |
+| Nav/footer product links | phase 2 (shared components) | ❌ untracked |
+
+Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×2) button variants — wire all 4. Accessory names in Framer use `<a name="Flex Saline Sensors">` wrappers (stale name attr, harmless).
+
 ---
 
 ## Verification (after each phase publish)

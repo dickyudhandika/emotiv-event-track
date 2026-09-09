@@ -3,7 +3,7 @@
 Site: https://www.emotiv.com
 Updated: 2026-09-08
 Section values: 22 (snackbar added)
-Product values: 8
+Product values: 10
 
 ## Vocabulary
 
@@ -46,6 +46,8 @@ Product values: 8
 | 6 | `emotivpro` | EMOTIVPRO software | same |
 | 7 | `insight_charging_cable` | Insight accessory | /insight accessories row |
 | 8 | `insight_sensor_tips` | Insight accessory | /insight accessories row |
+| 9 | `epoc_x_rubber_comfort_pads` | EPOC X accessory | /epoc-x accessories row |
+| 10 | `epoc_x_usb_receiver_universal` | EPOC X accessory | /epoc-x accessories row |
 
 Rules: values match page slugs, underscored. Accessories get own slugs (distinct shop SKUs, separate demand signal) — prefixed with parent product. Bundle promos map to the product, not the bundle name.
 
