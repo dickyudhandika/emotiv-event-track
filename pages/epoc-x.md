@@ -16,3 +16,18 @@ Current page traffic: 90d pageviews 9,705 (Umami, website `338c5f5a`).
 | 8 | cross-sell | other products' accessory cards | accessories row | Insight cable, sensor tips | — | ⏸ deferred |
 
 Wiring done. Live-verified 2026-09-09 (v11): hero ×2 + productnav ×6 + accessories ×6 with `product=epoc_x` (14 total); zero old `product`-section anchors; globals clean. Plan: `PRODUCT-ROLLOUT.md` → `/epoc-x` mapping.
+
+## A/B test log (epoc-x)
+
+| Item | Detail |
+|---|---|
+| Test | Hero layout — control vs left-aligned hero variant |
+| Control route | `C7IYYq1t2` → Umami tag `epocx-control` |
+| Variant B route | `GU6vo2Ncg` → tag `epocx-variant-b` |
+| Scope | **Variant B edits hero only** — productnav ×6 + accessories ×6 counts are the integrity check (should come out ~equal across variants) |
+| Variant source | `data-framer-hydrate-v2` routeId on `#main` — never the `framer_variant` URL param (random per real visitor) |
+| Hero diff | control: centered, black text, gradient headline, "Buy now" ×4 · variant B: left-aligned, white text, "Buy Now" ×4 (CTA casing differs slightly — labels not identical across variants) |
+| Tracking | No new events — same `cta_click` + `product=epoc_x`; analysis = Umami Path `/epoc-x` split by session tag |
+| Started | 2026-09-10 (tags live-verified both variants; script ×1, no double-inject) |
+| Mechanism | Snippet `obcX5y7mC` (renamed "epocx AB tag") — routeId → tag map, fallback `epocx-control`, scoped `^\/epoc-x\/?$` |
+| Baseline snippet (new 2026-09-10) | "site baseline tag" — injects script.js with tag `site-baseline` on every page EXCEPT `/epoc-x`. Old `obcX5y7mC` was the site's ONLY injector; adding the epocx scope killed tracking on `/`, `/insight`, etc. Baseline restores it. Scope gotcha on record: Framer Custom Code with no path scope ships on ALL pages — always pair routeId map with a path guard AND a companion baseline injector |

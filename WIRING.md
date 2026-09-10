@@ -22,7 +22,7 @@ Label = auto-capture + Framer dedupe (global listener). Explicit `data-umami-eve
 
 ## Homepage `/`
 
-**A/B test ended 2026-09-09 — control (`augiA20Il`) retained.** Variant B (`J4y1ztAFM`) retired; its route is no longer served and its hero carousel no longer exists. History kept in the changelog below. Homepage sessions still tagged `data-tag=homepage-control` via snippet `obcX5y7mC` (acts as a log; no split traffic anymore).
+**A/B test ended 2026-09-09 — control (`augiA20Il`) retained.** Variant B (`J4y1ztAFM`) retired; its route is no longer served. Homepage sessions now tagged `site-baseline` by the "site baseline tag" snippet (2026-09-10). History kept in the changelog below.
 
 ### Per-section wiring
 
@@ -50,6 +50,7 @@ Label = auto-capture + Framer dedupe (global listener). Explicit `data-umami-eve
 
 ### Changelog / A/B log
 
+- 2026-09-10: **epoc-x A/B test live.** Snippet `obcX5y7mC` retagged to `epocx-control`/`epocx-variant-b` (routeId map), scoped `^\/epoc-x\/?$`. New companion snippet "site baseline tag" injects script.js `site-baseline` on all other pages — `obcX5y7mC` was the site's ONLY script.js injector, so scoping it without the baseline killed tracking site-wide (homepage/insight scriptCount 0 during the gap). Verified: both epocx variants script ×1 correct tag; homepage/insight script ×1 `site-baseline`; homepage CTA click-chain intact. Note: pages outside `/` and `/epoc-x` were tagged `homepage-control` (the old fallback) from 2026-08-11 — usable as pageview log only, not per-page attribution.
 - 2026-09-09: **A/B test concluded — control won.** Variant B route no longer served; `pages/homepage.md` updated to control-only, history moved here. Snippet `obcX5y7mC` retained (tags all homepage sessions `homepage-control`).
 - 2026-08-11: A/B variant audit. Both variants verified. Fixes applied: platform CTA `trackPathway` → `trackPlatform`; footer "Academic Research" `trackFooter` added. Accordion cards 2-4 confirmed tracked (shared component). Product slideshow labels accepted as-is (badge-prefixed). Variant B hero carousel adds +4 `product` elements.
 - 2026-08-10: Homepage wired. Fixed product label (`"Product"` → distinct), platform section split from pathway, applications button-only, global listener dedupe deployed.
