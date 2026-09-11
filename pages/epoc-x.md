@@ -51,7 +51,7 @@ After wiring case studies/specs/comparison/accessoriesall, `framer_variant` curl
 | `accessoriesall` | 2 | 2 | ✅ equal |
 | `productnav` | 6 | 6 | ✅ equal |
 | `hero` | 2 | 4 | expected (hero-only diff) |
-| `accessories` | 6 | **4** | ✅ corrected baseline (variant B slideshow = 2 products × desk/mob) |
+| `accessories` | 6 | **6** | ✅ equal (variant B re-tagged to same card set: control grid / B slideshow both 3 products × desk/mob) |
 
 **Root cause: variant B uses a DIFFERENT accessories component** — a "More Accessories" **slideshow** (`Related Accessories section` → `slideshow` → `item`, cards `desk w price`/`mobile w price`), NOT the control's static grid. The slideshow was never wired.
 
@@ -59,4 +59,4 @@ After wiring case studies/specs/comparison/accessoriesall, `framer_variant` curl
 - Epoc X Comfort Pads → `./epoc-x-rubber-comfort-pads`
 - (USB Receiver) → `./epoc-x-usb-receiver-universal` — each slide ×2 breakpoints = 4 card `<a>` elements
 
-**Fix (done 2026-09-11, live-verified):** planted `trackAccessoriesEpocX` (`cta_click`/`accessories`/`epoc_x`) on the shared slideshow `item` card component root (whole-card link, per slideshow rule — NOT the slideshow wrapper). Live count = **4** events (2 products × desk+mob) — exactly as predicted. The original "~equal ×6" assumption was wrong: variant B genuinely has 2 accessory products in a different component. Corrected integrity baseline for `accessories`: control 6, variant B 4.
+**Fix (done 2026-09-11, live-verified):** planted `trackAccessoriesEpocX` (`cta_click`/`accessories`/`epoc_x`) on the variant B slideshow card component root (per slideshow rule — NOT the slideshow wrapper). First live count = **4** (2 products × desk+mob); re-check after user re-tagged = **6**, now identical to control's 6 card names (comfort pads, usb receiver, insight cable/sensor-tips × desk/mob). Corrected integrity baseline: **accessories control 6 = variant B 6**. The "~equal ×6" scope note remains correct — variant B just needed the slideshow wired.
