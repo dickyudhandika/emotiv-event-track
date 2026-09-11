@@ -632,6 +632,39 @@ export function trackSpecsEpocX(Component: ComponentType): ComponentType {
     })
 }
 
+// Comparison + accessories-index CTAs on product pages (2026-09-11) — outgoing page
+// navigations. section = destination role (comparison / accessoriesall), NOT a nav
+// structure. Distinct values so button clicks don't merge with accessory-card clicks.
+// Both page-local product content → product=epoc_x.
+
+export function trackComparisonEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="comparison"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
+export function trackAccessoriesAllEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessoriesall"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
 // Accessory cards on product pages (2026-09-08, QA'd model) — section=accessories
 // (own region role), product=parent ecosystem; label differentiates the item.
 // Replaces plain trackProduct on accessory cards.

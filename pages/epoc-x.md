@@ -1,6 +1,6 @@
 # EPOC X `/epoc-x` — Event Coverage
 
-Status: ✅ **live** (product-prop rollout) + ✅ **live-global** — double-track fixed 2026-09-09; hero/sub-nav/accessories verified with `product=epoc_x`, globals (nav/footer/snackbar) clean no-product. Case studies + specs wired `product=epoc_x` 2026-09-11. Insight cross-sell, testimonials, features, leadmagnet deferred/dropped (see notes).
+Status: ✅ **live** (product-prop rollout) + ✅ **live-global** — double-track fixed 2026-09-09; hero/sub-nav/accessories verified with `product=epoc_x`, globals (nav/footer/snackbar) clean no-product. Case studies, specs, comparison, accessoriesall wired `product=epoc_x` 2026-09-11. Insight cross-sell, testimonials, features, leadmagnet deferred/dropped (see notes).
 
 Current page traffic: 90d pageviews 9,705 (Umami, website `338c5f5a`).
 
@@ -15,12 +15,14 @@ Current page traffic: 90d pageviews 9,705 (Umami, website `338c5f5a`).
 | 7 | `accessories` | accessory cross-sell cards | accessories row | Rubber Comfort Pads, USB Receiver Universal | `cta_click` + `product=epoc_x` | ✅ `trackAccessoriesEpocX` (old `product`-section double-track removed) |
 | 8 | `casestudies` | case study cards (whole-card links) | case studies row | Open Your Eyes / See the Music, The Future of Gaming, BCI4Kids Calgary | `content_click` + `product=epoc_x` | ✅ `trackCaseStudiesEpocX` |
 | 9 | `specs` | static specification table (desktop + mobile) | spec section | any click in section (no links/buttons) | `content_click` + `product=epoc_x` | ✅ `trackSpecsEpocX` — plant on BOTH breakpoint instances |
-| 10 | cross-sell | other products' accessory cards | accessories row | Insight cable, sensor tips | — | ⏸ deferred |
+| 10 | `comparison` | comparison page CTA | compare section | Show full comparison | `cta_click` + `product=epoc_x` | ✅ `trackComparisonEpocX` |
+| 11 | `accessoriesall` | accessories index CTA | accessories section | See all accessories | `cta_click` + `product=epoc_x` | ✅ `trackAccessoriesAllEpocX` |
+| 12 | cross-sell | other products' accessory cards | accessories row | Insight cable, sensor tips | — | ⏸ deferred |
 | — | `testimonials` | static quote cards (Trusted by Researchers) | testimonials | — | — | ⏸ skipped — no CTA, nothing clickable |
 | — | `features` | static spec grid | features | — | — | ⏸ skipped — no CTA |
 | — | `leadmagnet` | download card | download | — | — | ⏸ skipped — display card only, no actual form in DOM |
 
-Wiring done. Live-verified 2026-09-09 (v11): hero ×2 + productnav ×6 + accessories ×6 with `product=epoc_x` (14 total); zero old `product`-section anchors; globals clean. Case studies `trackCaseStudiesEpocX` + specs `trackSpecsEpocX` added 2026-09-11 (pending Framer plant + publish + live-verify). Plan: `PRODUCT-ROLLOUT.md` → `/epoc-x` mapping.
+Wiring done. Live-verified 2026-09-09 (v11): hero ×2 + productnav ×6 + accessories ×6 with `product=epoc_x` (14 total); zero old `product`-section anchors; globals clean. Case studies `trackCaseStudiesEpocX` + specs `trackSpecsEpocX` + comparison `trackComparisonEpocX` + accessoriesall `trackAccessoriesAllEpocX` added 2026-09-11 (pending Framer plant + publish + live-verify). Plan: `PRODUCT-ROLLOUT.md` → `/epoc-x` mapping.
 
 ## A/B test log (epoc-x)
 

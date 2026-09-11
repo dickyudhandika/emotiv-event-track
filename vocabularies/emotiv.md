@@ -1,8 +1,8 @@
 # Vocabulary: EMOTIV
 
 Site: https://www.emotiv.com
-Updated: 2026-09-08
-Section values: 23 (snackbar, accessories added)
+Updated: 2026-09-11
+Section values: 25 (comparison, accessoriesall added)
 Product values: 6
 
 ## Vocabulary
@@ -32,6 +32,8 @@ Product values: 6
 | 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
 | 22 | `snackbar` | floating promo banner | all | MN8 bundle promo | `cta_click` |
 | 23 | `accessories` | accessory cross-sell cards | product pages (epoc-x, insight, …) | accessory card clicks | `cta_click` |
+| 24 | `comparison` | comparison page CTA | product pages | Show full comparison | `cta_click` |
+| 25 | `accessoriesall` | accessories index CTA | product pages | See all accessories | `cta_click` |
 
 ## Product vocabulary (2026-09-08, rev 2 — QA'd)
 
@@ -41,7 +43,7 @@ Product values: 6
 
 | # | Value | Identity | Appears on |
 |---|---|---|---|
-| 1 | `epoc_x` | EPOC X headset | hero, productnav, casestudies, specs, accessories, product-section |
+| 1 | `epoc_x` | EPOC X headset | hero, productnav, casestudies, specs, comparison, accessoriesall, accessories, product-section |
 | 2 | `epoc_x_pro` | EPOC X PRO headset | hero, productnav |
 | 3 | `mn8` | MN8 ear-EEG | hero, productnav |
 | 4 | `flex` | Flex 2 headset | hero, productnav |
@@ -81,6 +83,8 @@ If auto-capture's combined text is undesirable, set an explicit `data-umami-even
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (47 exports total).
+- Exports live in `templates/umami.tsx` (49 exports total).
 
 `specs` nuance (2026-09-11): spec content is a **static table** (no accordion toggle on epoc-x). Clicking anywhere in the spec root fires `content_click` — reader-engagement signal, not a conversion. If a page ever has interactive spec toggles (expandable rows), use `cta_click` there instead.
+
+`leadmagnet` / HubSpot (2026-09-11): the whitepaper download is a **HubSpot embedded form rendered in a cross-origin iframe** — the submit button is NOT in the parent DOM, so `data-umami-event` overrides CANNOT reach it. Track via HubSpot's `onFormSubmitted` callback in the Framer Custom Code embed: `onFormSubmitted: function(){ window.umami && window.umami.track('form_submit', { section: 'leadmagnet', product: 'epoc_x' }) }`. Fires on successful submit (better than click — a click isn't a conversion).
