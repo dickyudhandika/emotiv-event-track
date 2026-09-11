@@ -595,6 +595,24 @@ export function trackProductSeeFlex(Component: ComponentType): ComponentType {
     })
 }
 
+// Case studies on product pages (2026-09-11) — section=casestudies + product=parent.
+// Whole-card links (Case Study component root). Plain trackCaseStudies (no product)
+// stays for non-product pages; this adds the product dimension per rev-2 model.
+
+export function trackCaseStudiesEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="casestudies"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
 // Accessory cards on product pages (2026-09-08, QA'd model) — section=accessories
 // (own region role), product=parent ecosystem; label differentiates the item.
 // Replaces plain trackProduct on accessory cards.
