@@ -31,10 +31,32 @@ Wiring done. Live-verified 2026-09-09 (v11): hero ×2 + productnav ×6 + accesso
 | Test | Hero layout — control vs left-aligned hero variant |
 | Control route | `C7IYYq1t2` → Umami tag `epocx-control` |
 | Variant B route | `GU6vo2Ncg` → tag `epocx-variant-b` |
-| Scope | **Variant B edits hero only** — productnav ×6 + accessories ×6 counts are the integrity check (should come out ~equal across variants) |
+| Scope | **Variant B edits hero only** — productnav ×6 + accessories ×6 are the integrity check (should come out ~equal across variants) |
 | Variant source | `data-framer-hydrate-v2` routeId on `#main` — never the `framer_variant` URL param (random per real visitor) |
 | Hero diff | control: centered, black text, gradient headline, "Buy now" ×4 · variant B: left-aligned, white text, "Buy Now" ×4 (CTA casing differs slightly — labels not identical across variants) |
 | Tracking | No new events — same `cta_click` + `product=epoc_x`; analysis = Umami Path `/epoc-x` split by session tag |
 | Started | 2026-09-10 (tags live-verified both variants; script ×1, no double-inject) |
 | Mechanism | Snippet `obcX5y7mC` (renamed "epocx AB tag") — routeId → tag map, fallback `epocx-control`, scoped `^\/epoc-x\/?$` |
 | Baseline snippet (new 2026-09-10) | "site baseline tag" — injects script.js with tag `site-baseline` on every page EXCEPT `/epoc-x`. Old `obcX5y7mC` was the site's ONLY injector; adding the epocx scope killed tracking on `/`, `/insight`, etc. Baseline restores it. Scope gotcha on record: Framer Custom Code with no path scope ships on ALL pages — always pair routeId map with a path guard AND a companion baseline injector |
+
+### 2026-09-11 integrity check — accessories layout differs between variants
+
+After wiring case studies/specs/comparison/accessoriesall, `framer_variant` curl audit found:
+
+| Section | Control (C7IYYq1t2) | Variant B (GU6vo2Ncg) | Verdict |
+|---|---|---|---|
+| `casestudies` | 3 | 3 | ✅ equal |
+| `specs` | 8 | 8 | ✅ equal |
+| `comparison` | 2 | 2 | ✅ equal |
+| `accessoriesall` | 2 | 2 | ✅ equal |
+| `productnav` | 6 | 6 | ✅ equal |
+| `hero` | 2 | 4 | expected (hero-only diff) |
+| `accessories` | 6 | **0** | ❌ **FAIL** |
+
+**Root cause: variant B uses a DIFFERENT accessories component** — a "More Accessories" **slideshow** (`Related Accessories section` → `slideshow` → `item`, cards `desk w price`/`mobile w price`), NOT the control's static grid. The slideshow was never wired.
+
+**Variant B slideshow content** (2 products vs control's 3):
+- Epoc X Comfort Pads → `./epoc-x-rubber-comfort-pads`
+- (USB Receiver) → `./epoc-x-usb-receiver-universal` — each slide ×2 breakpoints = 4 card `<a>` elements
+
+**Fix (pending Framer plant + publish):** plant `trackAccessoriesEpocX` (`cta_click`/`accessories`/`epoc_x`) on the shared slideshow `item` card component root (whole-card link, per slideshow rule — NOT the slideshow wrapper). Expect **4** events (2 products × desk+mob), NOT 6. The original "~equal ×6" assumption was wrong: variant B genuinely has 2 accessory products in a different component. Corrected integrity baseline for `accessories`: control 6, variant B 4.
