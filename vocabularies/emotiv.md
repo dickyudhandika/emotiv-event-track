@@ -23,7 +23,7 @@ Product values: 6
 | 12 | `casestudies` | case study cards | product pages | See case study ×3, card links | `content_click` (+ `product` on product pages) |
 | 13 | `testimonials` | researcher quotes | product pages | Validation Studies | `cta_click` |
 | 14 | `leadmagnet` | whitepaper download + form | product pages | Download whitepaper | `form_submit` |
-| 15 | `specs` | specifications accordion | product pages, comparison | Specifications | `cta_click` |
+| 15 | `specs` | specifications accordion / table | product pages, comparison | Specifications; any click in static spec section | `content_click` (static table) / `cta_click` (interactive) — see note |
 | 16 | `usecases` | solution use-case cards | solution pages (enterprise, academic, developer) | Customer Experiences, Workplace Wellness | `cta_click` |
 | 17 | `gettingstarted` | developer onboarding 3-step | /developer | Create an Emotiv account, Register your app | `cta_click` |
 | 18 | `tiers` | developer partner tiers | /developer | Register, Contact us | `cta_click` |
@@ -41,7 +41,7 @@ Product values: 6
 
 | # | Value | Identity | Appears on |
 |---|---|---|---|
-| 1 | `epoc_x` | EPOC X headset | hero, productnav, casestudies, accessories, product-section |
+| 1 | `epoc_x` | EPOC X headset | hero, productnav, casestudies, specs, accessories, product-section |
 | 2 | `epoc_x_pro` | EPOC X PRO headset | hero, productnav |
 | 3 | `mn8` | MN8 ear-EEG | hero, productnav |
 | 4 | `flex` | Flex 2 headset | hero, productnav |
@@ -81,4 +81,6 @@ If auto-capture's combined text is undesirable, set an explicit `data-umami-even
 
 - Sitemap audit: 958 URLs → 8 templates (homepage, product, comparison, solution, blog index, blog articles, neuroscience hub, knowledge base, legal). Blog/neuroscience/KB/legal reuse `hero`/`news`/`content`/`footer` — no new values.
 - `gettingstarted`/`tiers`/`community` kept separate — team compares them against each other.
-- Exports live in `templates/umami.tsx` (46 exports total).
+- Exports live in `templates/umami.tsx` (47 exports total).
+
+`specs` nuance (2026-09-11): spec content is a **static table** (no accordion toggle on epoc-x). Clicking anywhere in the spec root fires `content_click` — reader-engagement signal, not a conversion. If a page ever has interactive spec toggles (expandable rows), use `cta_click` there instead.

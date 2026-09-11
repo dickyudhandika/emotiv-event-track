@@ -613,6 +613,25 @@ export function trackCaseStudiesEpocX(Component: ComponentType): ComponentType {
     })
 }
 
+// Specs on product pages (2026-09-11) — section=specs + product=parent.
+// Static specification table (no links/buttons). content_click on the section root
+// fires on ANY click within the specs region — reader engagement signal. Plant on BOTH
+// breakpoint instances (spec - desktop - black / spec - mobile - black).
+
+export function trackSpecsEpocX(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="specs"
+                data-umami-event-product="epoc_x"
+            />
+        )
+    })
+}
+
 // Accessory cards on product pages (2026-09-08, QA'd model) — section=accessories
 // (own region role), product=parent ecosystem; label differentiates the item.
 // Replaces plain trackProduct on accessory cards.
