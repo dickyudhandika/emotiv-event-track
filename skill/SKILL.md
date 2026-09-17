@@ -52,12 +52,12 @@ Assign `section` values to Umami custom events on **any** website. A vocabulary 
 
 One row per distinct CTA, grouped by region, with the value you propose. This is the artifact a human approves before anything gets wired.
 
-| # | Region (where it sits) | CTA text | `section` | event | export | `subject` |
+| # | Region (where it sits) | CTA text | `section` | event | export | second prop |
 |---|---|---|---|---|---|---|
-| 1 | top sub-nav strip | Overview | `productnav` | `cta_click` | `trackProductnavEpocX` | `epoc_x` |
-| 2 | top sub-nav strip | Buy | `productnav` | `cta_click` | `trackProductnavEpocX` | `epoc_x` |
-| 3 | first fold | Buy now | `hero` | `cta_click` | `trackHeroEpocX` | `epoc_x` |
-| 4 | body link | Learn about EMOTIVPRO | `crosssell` | `content_click` | `trackCrosssellInfoEmotivpro` | `emotivpro` |
+| 1 | top sub-nav strip | Overview | `productnav` | `cta_click` | `trackProductnavEpocX` | `product=epoc_x` |
+| 2 | top sub-nav strip | Buy | `productnav` | `cta_click` | `trackProductnavEpocX` | `product=epoc_x` |
+| 3 | first fold | Buy now | `hero` | `cta_click` | `trackHeroEpocX` | `product=epoc_x` |
+| 4 | body link | Learn about EMOTIVPRO | `crosssell` | `content_click` | `trackCrosssellInfoEmotivpro` | `product=emotivpro` |
 
 State expected instance counts as **`≥ N`**, never exact equality — most page builders (Framer, Webflow, WP block themes) render one button per breakpoint variant, so live counts run 2–5× the visible count.
 
@@ -66,7 +66,7 @@ State expected instance counts as **`≥ N`**, never exact equality — most pag
 | File | What changes |
 |---|---|
 | `vocabularies/<site>.md` | New or updated value registry (template: `vocabularies/_template.md`) |
-| `templates/umami.tsx` | One explicit export per (section × subject) pair, or the site's own override file |
+| `templates/umami.tsx` | One explicit export per (section × entity) pair, or the site's own override file |
 | `RULES.md` / `skill/SKILL.md` | Only if the *rule* changed — not for a new site |
 
 ## Section rules
@@ -91,7 +91,7 @@ State expected instance counts as **`≥ N`**, never exact equality — most pag
 **Steps:**
 
 4. **Name by role:** lowercase, single word, stable forever. `gettingstarted`, not `get-started` or `Getting Started`.
-5. **One export per (section × subject):** an explicit function declaration. Factory patterns have a shadowing pitfall — the host's override picker silently breaks.
+5. **One export per (section × entity):** an explicit function declaration. Factory patterns have a shadowing pitfall — the host's override picker silently breaks.
 6. **Update the vocabulary everywhere:** export-file header comment + vocabulary file + changelog line. The header comment is the source of truth for the next scan.
 7. **Watch the cap:** past ~20 values, every addition needs a written justification.
 
@@ -121,14 +121,15 @@ Skipping steps 2–3 is the failure mode: a mapping that looks right (all `Buy` 
 
 If the page is JS-rendered and `curl` returns an empty shell, escalate the fetch: static HTML → headless browser text snapshot → full browser. Cache-bust with `?v=$(date +%s)`.
 
-## The subject prop (optional second dimension)
+## The second prop (optional — name it per site)
 
-Use it when the site needs to compare *what* was clicked across entities (products, plans, integrations). Rules:
+Use it when the site needs to compare *what* was clicked across entities (products, plans, integrations). **Attribute name is `data-umami-event-<propname>` — the site picks `<propname>` once and never changes it.** EMOTIV calls it `product` (`data-umami-event-product="epoc_x"`); a SaaS site might use `plan`. This skill says "subject" generically; substitute the site's actual name. Rules:
 
-- **Page-local content ONLY.** Global/shared components (nav, footer, snackbar) NEVER carry a subject — they are ONE component reused everywhere, so the value would be false on every page but one. Globals stay section-only; page attribution is free from the URL filter.
+- **Page-local content ONLY.** Global/shared components (nav, footer, snackbar) NEVER carry the second prop — they are ONE component reused everywhere, so the value would be false on every page but one. Globals stay section-only; page attribution is free from the URL filter.
 - Applied via per-entity static exports: `track<Section><Entity>`, one explicit export each.
 - Sub-items (accessories, add-ons, bundles) map to their **parent** entity; the auto-captured label names the item.
-- Accessories/child cards use `section=<parent-section>` + `subject=<parent>`, never their own slug.
+- Accessories/child cards use `section=<parent-section>` + `<propname>=<parent>`, never their own slug.
+- Never rename it mid-project — the prop name is as frozen as the values themselves.
 
 ## Events
 
@@ -196,10 +197,10 @@ Expect `{ n: "cta_click", p: { section: "hero", label: "Buy" } }` + a second `ap
 
 ```bash
 curl -sL "https://<site>/<page>?v=$(date +%s)" | grep -o 'data-umami-event-section="[^"]*"' | sort | uniq -c
-curl -sL "https://<site>/<page>?v=$(date +%s)" | grep -o 'data-umami-event-subject="[^"]*"' | sort | uniq -c
+curl -sL "https://<site>/<page>?v=$(date +%s)" | grep -o 'data-umami-event-<propname>="[^"]*"' | sort | uniq -c
 ```
 
-Expect the subject prop only on page-local sections; global sections present with NO subject. Also check for **double-tracking**: the same element carrying both an old and a new override fires twice with different sections.
+Expect the second prop only on page-local sections; global sections present with NO second prop. Also check for **double-tracking**: the same element carrying both an old and a new override fires twice with different sections.
 
 **A/B variants: verify at runtime, not from static HTML.** The tag exists only after injection. Open each variant, wait ~4s (MutationObserver + fallback budget), then confirm: exactly one analytics script tag, its `data-tag`, and the route id matching the expected variant. Then re-check 1–2 non-test pages for the correct baseline/no-injection state.
 
