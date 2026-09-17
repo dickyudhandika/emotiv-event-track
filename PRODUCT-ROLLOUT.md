@@ -55,6 +55,103 @@ Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×
 
 ---
 
+### Phase 3 mappings — live-audited 2026-09-17
+
+All rows below re-verified against live HTML on 2026-09-17 with a positional DOM scan (nav/footer subtrees removed). Where the earlier draft's counts disagreed with the live page, the live value is used and the correction is noted.
+
+### `/epoc-x-pro` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Hero "Reserve Yours Today" ×2 (39% through page) | `trackHeroEpocXPro` | ❌ pending |
+| Banner "Reserve Epoc X Pro" ×3 + "Reserve EPOC X PRO" ×1 (90%) | `trackBannerEpocXPro` | ❌ pending |
+| No sub-nav, accessories, case studies, or specs CTAs | — | n/a |
+
+### `/flex` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Sub-nav ×5 (Overview, Features, EmotivPRO, For Researchers, Tech Specs) | `trackProductNavFlex` | ❌ pending |
+| Hero buy ×4 (Buy ×2 + Buy now ×2) | `trackHeroFlex` | ❌ pending |
+| EmotivPRO cross-sell ×5 (Learn about EmotivPRO ×3, PRO License ×2) | `trackProductNavFlex` | ❌ pending |
+| 6 accessory cards | `trackAccessoriesFlex` | ❌ pending |
+| See All Accessories ×2 (95%) | `trackAccessoriesAllFlex` | ❌ pending |
+
+### `/insight` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Hero Pre-Order ×6 (all breakpoints) | `trackHeroInsight` | ❌ pending |
+| Sub-nav ×3 (Overview, Tech Specs, Features) + Learn more ×2 | `trackProductNavInsight` | ❌ pending |
+| 3 case study cards | `trackCaseStudies` (plain, no product) | ❌ pending |
+| 2 accessory cards (Charging Cable, Sensor Tips) | `trackAccessoriesInsight` | ❌ pending |
+| See All Accessories ×2 (73%) | `trackAccessoriesAllInsight` | ❌ pending |
+
+### `/mn8` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Sub-nav ×3 (Overview, Features, Tech Specs) + Learn more ×2 | `trackProductNavMn8` | ❌ pending |
+| Hero buy ×4 (Buy ×2 + Buy now ×2) | `trackHeroMn8` | ❌ pending |
+| Store links ×16 (Apple Store ×2, Google Play ×8, MacOS ×3, Windows ×3) | `trackDownload` (no product) | ❌ pending |
+| EmotivPRO cross-sell ×2 | `trackProductNavMn8` | ❌ pending |
+| MN8 Sensor Pack card ×3 (91%) | `trackAccessoriesMn8` | ❌ pending |
+| See All Accessories ×2 (94%) | `trackAccessoriesAllMn8` | ❌ pending |
+| Third-party wellness apps (Mindful Garden, Hearts & Heal) | out of scope | ⏸ deferred |
+
+### `/studio` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| 2 "Get Pricing" cross-sell links (→ Epoc X, → MN8) | `trackProductNavStudio` | ❌ pending |
+
+### `/emotivpro` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Hero + pricing buy CTAs (22 instances: Shop now ×12, Buy now ×8, Buy ×2) | `trackHeroEmotivpro` | ❌ pending |
+| Sub-nav ×3 + Learn more ×2 + View licensing + Compare Plans ×4 + Start now for free ×3 | `trackProductNavEmotivpro` | ❌ pending |
+| App store badges ×8 (3 destinations) | `trackDownloadEmotivpro` | ❌ pending |
+| "Read study" ×6 | `trackCaseStudies` (no product) | ❌ pending |
+| "Read the Full Tutorial" ×2 | `trackNews` (no product) | ❌ pending |
+
+### `/emotiv-brainviz` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Buy CTAs ×5 (29% ×2, 48% ×2, 63% ×1) | `trackHeroBrainviz` | ❌ pending |
+| Sub-nav ×3 (Overview, Features, Tech Specs) + Try BrainViz for Free ×2 | `trackProductNavBrainviz` | ❌ pending |
+
+### `/emotiv-bci` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Download EmotivBCI ×3 (10%) + BCI-OSC Buy now (40%) | `trackHeroBci` | ❌ pending |
+| Sub-nav ×3 + hardware cross-sell ×6 + Performance Metrics + Explore BCI-OSC + Node-RED + Register + Become Developer ×3 | `trackProductNavBci` | ❌ pending |
+| Launcher "Download" ×1 | `trackDownloadBci` | ❌ pending |
+| Third-party app badges (Mindful Garden ×3, Hearts & Heal ×3) | `trackDownload` (no product) | ❌ pending |
+| 4 case study cards (30-37%) | `trackCaseStudies` (no product) | ❌ pending |
+| Academy/article links (89-92%) | `trackNews` (no product) | ❌ pending |
+
+### `/emotiv-launcher` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Download Now For Free ×2 + hero Learn More ×2 + EmotivPRO cross-sell ×1 | `trackProductNavLauncher` | ❌ pending |
+| 4 platform installers (macOS, Windows x64, Ubuntu, Raspberry Pi) | `trackDownloadLauncher` | ❌ pending |
+
+### `brainwear.app` mapping (2026-09-17, live-HTML verified)
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Get Brainwear ×5 + bottom Shop now ×2 | `trackHeroBrainwear` | ❌ pending |
+| Hero Learn More ×5 + body How it Works ×4 + FAQ ×2 | `trackProductNavBrainwear` | ❌ pending |
+| App Store ×4 + Google Play ×4 | `trackDownloadBrainwear` | ❌ pending |
+
+Note: brainwear.app is a separate Framer project — `umami.tsx` must be pasted into its Code Overrides separately. No shared components with emotiv.com.
+
+---
+
 ## Verification (after each phase publish)
 
 1. `curl -sL "https://www.emotiv.com/insight?v=<n>" | grep -o 'data-umami-event-product="[^"]*"' | sort | uniq -c` — attributes live.

@@ -48,6 +48,8 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 
+**Product values** (2026-09-17, rev 3): `epoc_x`, `epoc_x_pro`, `mn8`, `flex`, `insight`, `emotivpro`, `studio`, `brainviz`, `bci`, `launcher`, `brainwear` (11 total: 6 hardware + 5 software/brand). Product prop is for **page-local** content only — global nav/footer/snackbar never carry it. See `vocabularies/emotiv.md` → Product vocabulary.
+
 **Product label variants** (same `product` section): `trackProduct` injects event + section only; label comes from the global listener's auto-capture with Framer dedupe (name leads the card → `Epoc X` / `MN8` / `Flex 2.0` / `Insight` distinct). See `RULES.md` → Labels → Framer dedupe.
 
 Full registry with notes: [`vocabularies/emotiv.md`](vocabularies/emotiv.md).
