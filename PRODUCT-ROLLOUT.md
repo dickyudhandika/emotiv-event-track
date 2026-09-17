@@ -55,102 +55,133 @@ Note: hero has BOTH desktop ("Buy"/"Buy Emotiv Epoc X") and mobile ("Buy now" ×
 
 ---
 
-### Phase 3 mappings — live-audited 2026-09-17
+### Phase 3 mappings — live-audited 2026-09-17, re-mapped to rev-4 values
 
-All rows below re-verified against live HTML on 2026-09-17 with a positional DOM scan (nav/footer subtrees removed). Where the earlier draft's counts disagreed with the live page, the live value is used and the correction is noted.
+All rows below re-verified against live HTML on 2026-09-17 with a positional DOM scan (nav/footer subtrees removed), then re-bucketed the same day under the **rev-4 value split**: `productnav` = the TOP sub-nav strip only; `crosssell` = different Emotiv product; `related` = leaves the page but refers no other product. Where the earlier draft disagreed with the live page, the live value is used and the correction noted.
 
-### `/epoc-x-pro` mapping (2026-09-17, live-HTML verified)
+### `/epoc-x-pro` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Hero "Reserve Yours Today" ×2 (39% through page) | `trackHeroEpocXPro` | ❌ pending |
+| Hero "Reserve Yours Today" ×2 (39%) | `trackHeroEpocXPro` | ❌ pending |
 | Banner "Reserve Epoc X Pro" ×3 + "Reserve EPOC X PRO" ×1 (90%) | `trackBannerEpocXPro` | ❌ pending |
-| No sub-nav, accessories, case studies, or specs CTAs | — | n/a |
+| No sub-nav, cross-sell, accessories, case studies, or specs CTAs | — | n/a |
 
-### `/flex` mapping (2026-09-17, live-HTML verified)
+### `/flex` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Sub-nav ×5 (Overview, Features, EmotivPRO, For Researchers, Tech Specs) | `trackProductNavFlex` | ❌ pending |
-| Hero buy ×4 (Buy ×2 + Buy now ×2) | `trackHeroFlex` | ❌ pending |
-| EmotivPRO cross-sell ×5 (Learn about EmotivPRO ×3, PRO License ×2) | `trackProductNavFlex` | ❌ pending |
-| 6 accessory cards | `trackAccessoriesFlex` | ❌ pending |
+| Top strip ×6 (Overview, Features, EmotivPRO, For Researchers, Tech Specs, Buy ×2) | `trackProductNavFlex` | ❌ pending |
+| Hero buy ×2 (10%) | `trackHeroFlex` | ❌ pending |
+| EmotivPRO "PRO License" ×2 (45%) — buy intent | `trackCrosssellFlex` | ❌ pending |
+| EmotivPRO "Learn about EmotivPRO" ×3 (30%) — learn intent | `trackCrosssellInfoFlex` | ❌ pending |
+| 6 accessory cards (61-66%) | `trackAccessoriesFlex` | ❌ pending |
 | See All Accessories ×2 (95%) | `trackAccessoriesAllFlex` | ❌ pending |
 
-### `/insight` mapping (2026-09-17, live-HTML verified)
+Correction: sub-nav is 6 items incl. nav `Buy`; hero is ×2 not ×4 (the `Buy` ×2 sit in the top strip → `productnav`). EmotivPRO cross-sell splits into two exports by intent.
+
+### `/insight` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Hero Pre-Order ×6 (all breakpoints) | `trackHeroInsight` | ❌ pending |
-| Sub-nav ×3 (Overview, Tech Specs, Features) + Learn more ×2 | `trackProductNavInsight` | ❌ pending |
-| 3 case study cards | `trackCaseStudies` (plain, no product) | ❌ pending |
-| 2 accessory cards (Charging Cable, Sensor Tips) | `trackAccessoriesInsight` | ❌ pending |
+| Top strip (Overview, Tech Specs, Features) + sub-nav Pre-Order ×2 | `trackProductNavInsight` | ❌ pending |
+| Hero Pre-Order ×4 (`campaign=pre+order+hero+button`, 12%) | `trackHeroInsight` | ❌ pending |
+| Learn more ×2 (body anchor, 13%) + 3 pathway links (21%) | `trackRelatedInsight` | ❌ pending |
+| 3 case study cards (26-29%) | `trackCaseStudies` (plain, no product) | ❌ pending |
+| "license" ×2 → `./emotivpro` (40%) | `trackCrosssellInfoInsight` | ❌ pending |
+| 2 accessory cards (65-68%) | `trackAccessoriesInsight` | ❌ pending |
 | See All Accessories ×2 (73%) | `trackAccessoriesAllInsight` | ❌ pending |
 
-### `/mn8` mapping (2026-09-17, live-HTML verified)
+Corrections: Pre-Order ×6 splits 2 (top strip) / 4 (hero) by container; `license` and the 3 pathway links move from unwired to `crosssell` / `related`.
+
+### `/mn8` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Sub-nav ×3 (Overview, Features, Tech Specs) + Learn more ×2 | `trackProductNavMn8` | ❌ pending |
-| Hero buy ×4 (Buy ×2 + Buy now ×2) | `trackHeroMn8` | ❌ pending |
+| Top strip (Overview, Features, Tech Specs, Buy ×2) | `trackProductNavMn8` | ❌ pending |
+| Hero buy ×2 (`campaign=hero+buy+button`, 10%) | `trackHeroMn8` | ❌ pending |
+| Learn more ×2 (body anchor) + Become an Emotiv Developer ×3 | `trackRelatedMn8` | ❌ pending |
 | Store links ×16 (Apple Store ×2, Google Play ×8, MacOS ×3, Windows ×3) | `trackDownload` (no product) | ❌ pending |
-| EmotivPRO cross-sell ×2 | `trackProductNavMn8` | ❌ pending |
+| Emotiv Play ×3 + EmotivPRO ×2 — learn intent | `trackCrosssellInfoMn8` | ❌ pending |
 | MN8 Sensor Pack card ×3 (91%) | `trackAccessoriesMn8` | ❌ pending |
 | See All Accessories ×2 (94%) | `trackAccessoriesAllMn8` | ❌ pending |
-| Third-party wellness apps (Mindful Garden, Hearts & Heal) | out of scope | ⏸ deferred |
+| Third-party wellness apps (Mindful Garden, Hearts & Heal) | optional — `trackDownload` no product | ⏸ deferred |
 
-### `/studio` mapping (2026-09-17, live-HTML verified)
+Corrections: sub-nav is 4 items incl. nav `Buy`; hero is ×2 not ×4; body "Learn more" and Developer links are `related`, Emotiv Play + EmotivPRO are `crosssell`.
 
-| Element | Export to wire | Status |
-|---|---|---|
-| 2 "Get Pricing" cross-sell links (→ Epoc X, → MN8) | `trackProductNavStudio` | ❌ pending |
-
-### `/emotivpro` mapping (2026-09-17, live-HTML verified)
+### `/studio` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Hero + pricing buy CTAs (22 instances: Shop now ×12, Buy now ×8, Buy ×2) | `trackHeroEmotivpro` | ❌ pending |
-| Sub-nav ×3 + Learn more ×2 + View licensing + Compare Plans ×4 + Start now for free ×3 | `trackProductNavEmotivpro` | ❌ pending |
+| 2 "Get Pricing" links (73% → `./epoc-x`, 75% → `./mn8`) + explicit label each | `trackCrosssellStudio` | ❌ pending |
+
+Correction: both are `crosssell` (different products), not `productnav` — `/studio` has **no** top sub-nav at all.
+
+### `/emotivpro` mapping
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Top strip (Overview, Features, Pricing, Buy ×2) | `trackProductNavEmotivpro` | ❌ pending |
+| Body buy ×20 (Buy now ×8 at 17%, Shop now ×12 at 43%) | `trackHeroEmotivpro` | ❌ pending |
 | App store badges ×8 (3 destinations) | `trackDownloadEmotivpro` | ❌ pending |
+| Learn more ×2, View licensing ×1, Compare Plans/plans ×4 (body anchors) | `trackRelatedEmotivpro` | ❌ pending |
+| "Start now, for free" ×3 → `./emotiv-launcher` (50%) — buy intent | `trackCrosssellEmotivpro` | ❌ pending |
 | "Read study" ×6 | `trackCaseStudies` (no product) | ❌ pending |
 | "Read the Full Tutorial" ×2 | `trackNews` (no product) | ❌ pending |
 
-### `/emotiv-brainviz` mapping (2026-09-17, live-HTML verified)
+Corrections: the 7 body anchors move from `productnav` to `related`; `Start now, for free` moves to `crosssell`. Buy count is 20 (`Buy` ×2 are in the top strip, so `productnav`).
+
+### `/emotiv-brainviz` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Buy CTAs ×5 (29% ×2, 48% ×2, 63% ×1) | `trackHeroBrainviz` | ❌ pending |
-| Sub-nav ×3 (Overview, Features, Tech Specs) + Try BrainViz for Free ×2 | `trackProductNavBrainviz` | ❌ pending |
+| Top strip (Overview, Features, Tech Specs, Buy ×2) | `trackProductNavBrainviz` | ❌ pending |
+| Body buy ×3 (48% Buy now ×2, 63% Buy Now ×1) | `trackHeroBrainviz` | ❌ pending |
+| Try BrainViz for Free ×2 → `./emotiv-launcher` (49%) — learn intent | `trackCrosssellInfoBrainviz` | ❌ pending |
 
-### `/emotiv-bci` mapping (2026-09-17, live-HTML verified)
+Corrections: buy ×5 splits 2 (top strip) / 3 (hero); free-trial link is `crosssell` learn-intent, not `productnav`. `contact us` ×3 not wired.
+
+### `/emotiv-bci` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Download EmotivBCI ×3 (10%) + BCI-OSC Buy now (40%) | `trackHeroBci` | ❌ pending |
-| Sub-nav ×3 + hardware cross-sell ×6 + Performance Metrics + Explore BCI-OSC + Node-RED + Register + Become Developer ×3 | `trackProductNavBci` | ❌ pending |
-| Launcher "Download" ×1 | `trackDownloadBci` | ❌ pending |
-| Third-party app badges (Mindful Garden ×3, Hearts & Heal ×3) | `trackDownload` (no product) | ❌ pending |
+| Top strip (Overview, Features, Download EmotivBCI ×2) | `trackProductNavBci` | ❌ pending |
+| Body "Download EmotivBCI" ×1 + BCI-OSC "Buy now" ×1 | `trackHeroBci` | ❌ pending |
+| Hardware Buy now ×3 → Epoc X / Insight / MN8 + explicit label each | `trackCrosssellBci` | ❌ pending |
+| Learn More About Epoc X/Insight/MN8 ×3 + Emotiv Play ×3 | `trackCrosssellInfoBci` | ❌ pending |
+| Additional Modules, Explore BCI-OSC, Performance Metrics, Node-RED, Register, Developer ×3, Watch Series, gitbook | `trackRelatedBci` | ❌ pending |
 | 4 case study cards (30-37%) | `trackCaseStudies` (no product) | ❌ pending |
-| Academy/article links (89-92%) | `trackNews` (no product) | ❌ pending |
+| Launcher "Download" ×1 | `trackDownloadBci` | ❌ pending |
+| Third-party badges ×12 (Mindful Garden, Hearts & Heal) | `trackDownload` (no product) | ❌ pending |
+| IFA+ Summit article (91%) | `trackNews` (no product) | ❌ pending |
 
-### `/emotiv-launcher` mapping (2026-09-17, live-HTML verified)
+Corrections: Download EmotivBCI is ×3 total (2 top strip / 1 body). Hardware cross-sell ×6 was one `productnav` row → split into `trackCrosssellBci` (buys) + `trackCrosssellInfoBci` (learns). Five residue roles moved to `related`. Dep-rule: `Download EmotivBCI` → Launcher stays on the page's own sections, NOT crosssell.
 
-| Element | Export to wire | Status |
-|---|---|---|
-| Download Now For Free ×2 + hero Learn More ×2 + EmotivPRO cross-sell ×1 | `trackProductNavLauncher` | ❌ pending |
-| 4 platform installers (macOS, Windows x64, Ubuntu, Raspberry Pi) | `trackDownloadLauncher` | ❌ pending |
-
-### `brainwear.app` mapping (2026-09-17, live-HTML verified)
+### `/emotiv-launcher` mapping
 
 | Element | Export to wire | Status |
 |---|---|---|
-| Get Brainwear ×5 + bottom Shop now ×2 | `trackHeroBrainwear` | ❌ pending |
-| Hero Learn More ×5 + body How it Works ×4 + FAQ ×2 | `trackProductNavBrainwear` | ❌ pending |
+| "Download Now For Free" ×2 → `#download` (25%) | `trackHeroLauncher` | ❌ pending |
+| Hero "Learn More" ×2 → `#learn-more` (26%) | `trackRelatedLauncher` | ❌ pending |
+| "Learn More" ×1 → `./emotivpro` (41%) + explicit label | `trackCrosssellInfoLauncher` | ❌ pending |
+| 4 platform installers ×3 breakpoints = 12 (macOS, Windows, Ubuntu, Raspberry Pi) | `trackDownloadLauncher` | ❌ pending |
+
+Corrections: no `productnav` on this page (no top sub-nav). Hero anchor maps to `hero`; body anchor to `related`; EmotivPRO link to `crosssell`.
+
+### `brainwear.app` mapping
+
+| Element | Export to wire | Status |
+|---|---|---|
+| Get Brainwear ×5 (×3 hero + ×2 header) + bottom Shop now ×2 | `trackHeroBrainwear` | ❌ pending |
+| Learn More ×5 + How it Works / How It Works ×4 + FAQ ×2 | `trackRelatedBrainwear` | ❌ pending |
 | App Store ×4 + Google Play ×4 | `trackDownloadBrainwear` | ❌ pending |
+| Explore Play ×3 + Discover the Experiences ×2 → `emotivplay.com` | `trackCrosssellInfoBrainwear` | ❌ pending |
+| 3 blog article cards | `trackNews` (no product) | ❌ pending |
+| Legal / privacy links (footer) | boilerplate — not wired | ⏸ deferred |
+
+Corrections: no `productnav` (no sub-nav, no `<nav>` at all). `Get Brainwear` stays `hero` (Brainwear IS MN8's consumer brand — same-product clause). Article band + legal footer were missing from the first pass.
 
 Note: brainwear.app is a separate Framer project — `umami.tsx` must be pasted into its Code Overrides separately. No shared components with emotiv.com.
-
----
 
 ## Verification (after each phase publish)
 

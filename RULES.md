@@ -35,6 +35,8 @@ Rule: role is the question ("does hero beat footer?"), value is the answer key, 
 6. **Cap ~10-20 values per site.** Past that you're slicing components, not regions.
 7. **Label disambiguates within a section.** "View Specs" ×4 → explicit labels `Epoc X` / `MN8` / `Flex 2.0` / `Insight`. Never per-button event names unless the button is its own KPI.
 8. **Page-specific sections are legal.** `pathway` exists only on homepage — it's a layout region of that page. Don't force-fit into `product`.
+9. **Position decides nav vs body.** `productnav` = the TOP sub-nav strip only (the container holding the section anchors *and* the nav's own button). Anything in the body is `crosssell` (different product) or `related` (no other product) — never `productnav`. Verified precedent: `/epoc-x` has 6 `productnav` instances = 4 anchors + 2 nav `Buy` buttons in one top-strip container.
+10. **The page's own conversion funnel outranks the destination test.** A link to a different product that is nonetheless this page's own install path (`Download EmotivBCI` → `./emotiv-launcher`) stays on the page's primary section — otherwise the page's own conversion metric reads zero.
 
 ## Adding a new value — 3 gates + 4 steps
 

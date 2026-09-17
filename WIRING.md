@@ -63,108 +63,137 @@ Label = auto-capture + Framer dedupe (global listener). Explicit `data-umami-eve
 
 ## Product pages
 
-Per-page wiring, live-audited **2026-09-17** (positional DOM scan, nav/footer subtrees excluded). Full element tables + per-page verification commands in `pages/<page>.md`.
+Per-page wiring, live-audited **2026-09-17** (positional DOM scan, nav/footer subtrees excluded), re-mapped to **rev-4 values** same day. Full element tables + per-page verification commands in `pages/<page>.md`.
+
+**Rev-4 split:** `productnav` = the TOP sub-nav strip ONLY (the container holding both the section anchors and the nav's own button). Body links are split by href — `crosssell` = different Emotiv product, `related` = leaves the page but refers no other product.
 
 ### `/epoc-x-pro`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroEpocXPro` | `cta_click` | hero reserve buttons (×2, 39% through page) | Reserve Yours Today |
-| `banner` | `trackBannerEpocXPro` | `cta_click` | banner reserve buttons (×4, 90% — "Designed for the Next Generation of Research") | Reserve Epoc X Pro / Reserve EPOC X PRO |
+| `hero` | `trackHeroEpocXPro` | `cta_click` | hero reserve buttons (x2, 39%) | Reserve Yours Today |
+| `banner` | `trackBannerEpocXPro` | `cta_click` | banner reserve buttons (x4, 90%) | Reserve Epoc X Pro / Reserve EPOC X PRO |
 
-No sub-nav, accessories, case studies, or specs-section CTAs.
+No sub-nav, cross-sell, accessories, case studies, or specs. **Recommended first wire target** (2 exports, 6 buttons, 1 destination).
 
 ### `/flex`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroFlex` | `cta_click` | hero buy buttons (×4: Buy ×2 + Buy now ×2) | Buy, Buy now |
-| `productnav` | `trackProductNavFlex` | `cta_click` | sub-nav ×5 (Overview, Features, EmotivPRO, For Researchers, Tech Specs) + EmotivPRO cross-sell ×5 (Learn about EmotivPRO ×3, PRO License ×2) | per anchor |
-| `accessories` | `trackAccessoriesFlex` | `cta_click` | 6 accessory cards (Flex Cap, Felt Sensors, Control Box 2.0, Saline Sensors, Gel Sensors, Silicone Skirt) | per card (auto-captured) |
-| `accessoriesall` | `trackAccessoriesAllFlex` | `cta_click` | See All Accessories (×2, 95%) | See All Accessories |
+| `productnav` | `trackProductNavFlex` | `cta_click` | top strip x6 (Overview, Features, EmotivPRO, For Researchers, Tech Specs, Buy x2) | per anchor |
+| `hero` | `trackHeroFlex` | `cta_click` | hero buy (x2, 10%) | Buy now |
+| `crosssell` | `trackCrosssellFlex` | `cta_click` | EmotivPRO band "PRO License" x2 (45%) | PRO License |
+| `crosssell` | `trackCrosssellInfoFlex` | `content_click` | EmotivPRO band "Learn about EmotivPRO" x3 (30%) | Learn about EmotivPRO |
+| `accessories` | `trackAccessoriesFlex` | `cta_click` | 6 accessory cards (61-66%) — plant on card root (slideshow rule) | per card |
+| `accessoriesall` | `trackAccessoriesAllFlex` | `cta_click` | See All Accessories x2 (95%) | See All Accessories |
+
+Sub-nav `EmotivPRO` is a SAME-PAGE anchor (`./flex#...emotivpro`) so it stays `productnav`; the EmotivPRO band lower down is the cross-sell. Same word, two roles — href separates them.
 
 ### `/insight` (traffic: 90d pageviews 2,363)
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroInsight` | `cta_click` | hero pre-order (×6, all breakpoints) | Pre-Order |
-| `productnav` | `trackProductNavInsight` | `cta_click` | sub-nav (Overview, Tech Specs, Features) + Learn more (×2) | per anchor |
-| `casestudies` | `trackCaseStudies` | `content_click` | 3 case study cards (YSL Scientific Shopping, brain-drone race, Handi'Arcade) | per card |
-| `accessories` | `trackAccessoriesInsight` | `cta_click` | 2 accessory cards (Charging Cable, Sensor Tips) | per card |
-| `accessoriesall` | `trackAccessoriesAllInsight` | `cta_click` | See All Accessories (×2, 73%) | See All Accessories |
+| `productnav` | `trackProductNavInsight` | `cta_click` | top strip (Overview, Tech Specs, Features) + sub-nav Pre-Order x2 | per anchor |
+| `hero` | `trackHeroInsight` | `cta_click` | hero Pre-Order x4 (`campaign=pre+order+hero+button`, 12%) | Pre-Order |
+| `related` | `trackRelatedInsight` | `content_click` | Learn more x2 (body anchor, 13%), 3 pathway links (21%) | per link |
+| `casestudies` | `trackCaseStudies` | `content_click` | 3 case study cards (26-29%) | per card |
+| `crosssell` | `trackCrosssellInfoInsight` | `content_click` | "license" x2 → `./emotivpro` (40%) | license |
+| `accessories` | `trackAccessoriesInsight` | `cta_click` | 2 accessory cards (65-68%) | per card |
+| `accessoriesall` | `trackAccessoriesAllInsight` | `cta_click` | See All Accessories x2 (73%) | See All Accessories |
+
+Pre-Order splits 2 (top strip) / 4 (hero) by container — the first pass read all 6 as hero.
 
 ### `/mn8`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroMn8` | `cta_click` | hero buy buttons (×4: Buy ×2 + Buy now ×2) | Buy, Buy now |
-| `productnav` | `trackProductNavMn8` | `cta_click` | sub-nav ×3 (Overview, Features, Tech Specs) + Learn more (×2) + EmotivPRO cross-sell (×2) | per link |
-| `download` | `trackDownload` | `cta_click` | store links ×16 (Apple Store ×2, Google Play ×8, MacOS ×3, Windows ×3) | Apple Store, Google Play, Download for MacOS/Windows |
-| `accessories` | `trackAccessoriesMn8` | `cta_click` | MN8 Sensor Pack card (×3, 91%) | MN8 Sensor Pack |
-| `accessoriesall` | `trackAccessoriesAllMn8` | `cta_click` | See All Accessories (×2, 94%) | See All Accessories |
+| `productnav` | `trackProductNavMn8` | `cta_click` | top strip (Overview, Features, Tech Specs, Buy x2) | per anchor |
+| `hero` | `trackHeroMn8` | `cta_click` | hero buy x2 (`campaign=hero+buy+button`, 10%) | Buy now |
+| `related` | `trackRelatedMn8` | `content_click` | Learn more x2 (body anchor), Become an Emotiv Developer x3 | per link |
+| `download` | `trackDownload` | `cta_click` | Emotiv store links x16 (Apple Store x2, Google Play x8, MacOS x3, Windows x3) | per store |
+| `crosssell` | `trackCrosssellInfoMn8` | `content_click` | Learn more about Emotiv Play x3; Learn About EmotivPRO x2 | per link |
+| `accessories` | `trackAccessoriesMn8` | `cta_click` | MN8 Sensor Pack card x3 (91%) | MN8 Sensor Pack |
+| `accessoriesall` | `trackAccessoriesAllMn8` | `cta_click` | See All Accessories x2 (94%) | See All Accessories |
 
-Third-party wellness-app badges (Mindful Garden, Hearts & Heal) → out of scope, not wired.
+Optional/unwired: Mindful Garden + Hearts & Heal badges (third-party apps, `download` no product).
 
 ### `/studio`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `productnav` | `trackProductNavStudio` | `cta_click` | 2 Get Pricing cross-sell links (→ `/epoc-x`, → `/mn8`) | Get Pricing |
+| `crosssell` | `trackCrosssellStudio` | `cta_click` | 2 x "Get Pricing" (73% → `./epoc-x`, 75% → `./mn8`) | **explicit**: Get Pricing — Epoc X / Get Pricing — MN8 |
 
-Sparsest page in the set — no hero buy, sub-nav, accessories, case studies, or download region.
+**No `productnav`** — no top sub-nav strip exists on this page. Both links are the page's only locals.
 
 ### `/emotivpro`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroEmotivpro` | `cta_click` | hero + pricing buy buttons (22 instances: Shop now ×12, Buy now ×8, Buy ×2) | Shop now, Buy now, Buy |
-| `productnav` | `trackProductNavEmotivpro` | `cta_click` | sub-nav ×3 (Overview, Features, Pricing) + Learn more ×2 + View licensing + Compare Plans/Compare plans ×4 + Start now for free ×3 | per link |
-| `download` | `trackDownloadEmotivpro` | `cta_click` | app store badges ×8 across 3 destinations (PRO Mobile iOS/Android, PRO Tablet) | App Store, Google Play |
-| `casestudies` | `trackCaseStudies` | `content_click` | Read study ×6 (IEEE ×2, Frontiers ×2, internal ×2) | Read study |
-| `news` | `trackNews` | `content_click` | Read the Full Tutorial ×2 (Lab Streaming Layer) | Read the Full Tutorial |
+| `productnav` | `trackProductNavEmotivpro` | `cta_click` | top strip (Overview, Features, Pricing, Buy x2) | per anchor |
+| `hero` | `trackHeroEmotivpro` | `cta_click` | body buy x20 (Buy now 17%, Shop now 43%) — hero + pricing, all treated as `hero` | Buy now, Shop now |
+| `download` | `trackDownloadEmotivpro` | `cta_click` | 3 store destinations x8 (iOS mobile, Android mobile, iOS desktop) | App Store, Google Play |
+| `related` | `trackRelatedEmotivpro` | `content_click` | Learn more x2, View licensing x1, Compare Plans/plans x4 (all body anchors) | per link |
+| `crosssell` | `trackCrosssellEmotivpro` | `cta_click` | Start now, for free x3 → `./emotiv-launcher` (50%) | Start now, for free |
+| `casestudies` | `trackCaseStudies` | `content_click` | Read study x6 (2 IEEE, 2 Frontiers, 2 internal) | Read study |
+| `news` | `trackNews` | `content_click` | Read the Full Tutorial x2 (82%) | Read the Full Tutorial |
 
-Decision: all conversion buys use `section=hero`, including the pricing area — keeps hero CTA conversion comparable across pages.
+Confirmed 2026-09-16: all conversion buys = `hero` regardless of position, so hero-vs-hero stays comparable across pages. Live count 20, not 5.
 
 ### `/emotiv-brainviz`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroBrainviz` | `cta_click` | Buy CTAs ×5 across 3 regions (29% Buy ×2, 48% Buy now ×2, 63% Buy Now "at Play" ×1) | Buy, Buy now, Buy Now |
-| `productnav` | `trackProductNavBrainviz` | `cta_click` | sub-nav ×3 (Overview, Features, Tech Specs) + Try BrainViz for Free ×2 | per link |
+| `productnav` | `trackProductNavBrainviz` | `cta_click` | top strip (Overview, Features, Tech Specs, Buy x2) | per anchor |
+| `hero` | `trackHeroBrainviz` | `cta_click` | body buys x3 (48% Buy now x2, 63% Buy Now x1) | Buy now, Buy Now |
+| `crosssell` | `trackCrosssellInfoBrainviz` | `content_click` | Try BrainViz for Free x2 → `./emotiv-launcher` (49%) | Try BrainViz for Free |
+
+`contact us` x3 not wired (boilerplate support link inside a spec table).
 
 ### `/emotiv-bci`
 
+Highest-risk page: ~40 page-local instances across 8 values. Per-region verification recommended.
+
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroBci` | `cta_click` | Download EmotivBCI (×3, 10%) + BCI-OSC Buy now (40%) | Download EmotivBCI, Buy now |
-| `productnav` | `trackProductNavBci` | `cta_click` | sub-nav ×3 + hardware cross-sell ×6 (Buy now ×3, Learn More ×3) + Performance Metrics + Explore BCI-OSC + Node-RED + Register + Become Developer ×3 | per link |
-| `download` | `trackDownloadBci` / `trackDownload` | `cta_click` | Launcher Download (×1) / third-party badges (Mindful Garden ×3, Hearts & Heal ×3) | Download, App Store, Google Play |
+| `productnav` | `trackProductNavBci` | `cta_click` | top strip (Overview, Features, Download EmotivBCI x2) | per anchor |
+| `hero` | `trackHeroBci` | `cta_click` | body "Download EmotivBCI" x1 (10%) + BCI-OSC "Buy now" x1 (40%) | Download EmotivBCI, Buy now |
+| `crosssell` | `trackCrosssellBci` | `cta_click` | hardware Buy now x3 → Epoc X / Insight / MN8 (24-28%) | **explicit** per button |
+| `crosssell` | `trackCrosssellInfoBci` | `content_click` | Learn More About Epoc X/Insight/MN8 x3; Emotiv Play x3 | per link |
+| `related` | `trackRelatedBci` | `content_click` | Additional Modules, Explore BCI-OSC, Performance Metrics, Node-RED, Register, Developer x3, Watch Series, gitbook Learn More | per link |
 | `casestudies` | `trackCaseStudies` | `content_click` | 4 case study cards (30-37%) | per card |
-| `news` | `trackNews` | `content_click` | Watch Series, IFA+ Summit article, gitbook Learn More (89-92%) | per link |
+| `download` | `trackDownloadBci` / `trackDownload` | `cta_click` | Launcher "Download" x1 (own install) / third-party badges x12 | Download, App Store, Google Play |
+| `news` | `trackNews` | `content_click` | IFA+ Summit article (91%) | IFA+ Summit 17 |
 
-Highest-risk page: ~40 page-local CTA instances across 6 regions — verify per region, not once at the end.
+Dep-rule in play: `Download EmotivBCI` → `./emotiv-launcher` stays `hero`/`productnav` (own install path), NOT crosssell.
 
 ### `/emotiv-launcher`
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `productnav` | `trackProductNavLauncher` | `cta_click` | Download Now For Free ×2 + hero Learn More ×2 + EmotivPRO cross-sell ×1 | per link |
-| `download` | `trackDownloadLauncher` | `cta_click` | 4 platform installers ×4 breakpoints (macOS, Windows x64, Ubuntu .deb, Raspberry Pi armhf) | Download |
+| `hero` | `trackHeroLauncher` | `cta_click` | "Download Now For Free" x2 → `#download` (25%) | Download Now For Free |
+| `related` | `trackRelatedLauncher` | `content_click` | hero "Learn More" x2 → `#learn-more` (26%) | Learn More |
+| `crosssell` | `trackCrosssellInfoLauncher` | `content_click` | "Learn More" x1 → `./emotivpro` (41%) | **explicit**: Learn More (EmotivPRO) |
+| `download` | `trackDownloadLauncher` | `cta_click` | 4 platforms x3 breakpoints = 12 (macOS, Windows x64, Ubuntu .deb, Raspberry Pi armhf) | Download |
 
-Note: set explicit `data-umami-event-label="Learn More (EmotivPRO)"` on the cross-sell — otherwise it collides with the two hero Learn More anchors.
+**No `productnav`** — this page has no top sub-nav strip. Hero anchor is the primary install action → `hero`.
 
 ### `brainwear.app` (separate domain, same Umami site `338c5f5a`)
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `hero` | `trackHeroBrainwear` | `cta_click` | Get Brainwear ×5 (1%) + bottom Shop now ×2 (90%) | Get Brainwear, Shop now |
-| `productnav` | `trackProductNavBrainwear` | `cta_click` | hero Learn More ×5 + body How it Works ×4 + FAQ ×2 | per link |
-| `download` | `trackDownloadBrainwear` | `cta_click` | App Store ×4 + Google Play ×4 (10%) | App Store, Google Play |
+| `hero` | `trackHeroBrainwear` | `cta_click` | Get Brainwear x3 (hero) + x2 (header) + Shop now x2 (bottom) | Get Brainwear, Shop now |
+| `related` | `trackRelatedBrainwear` | `content_click` | Learn More x5, How it Works / How It Works x4, FAQ x2 | per link |
+| `download` | `trackDownloadBrainwear` | `cta_click` | App Store x4 + Google Play x4 | App Store, Google Play |
+| `crosssell` | `trackCrosssellInfoBrainwear` | `content_click` | Explore Play x3, Discover the Experiences x2 → `emotivplay.com` | per link |
+| `news` | `trackNews` | `content_click` | 3 blog article cards | per card |
 
-Note: brainwear.app is a **separate Framer project** — it does NOT share emotiv.com's nav/footer/snackbar components, and `umami.tsx` must be pasted into its Code Overrides independently. All tracking there is page-local.
+No shared globals — brainwear.app does NOT use emotiv.com's nav/footer/snackbar. Paste `umami.tsx` into its own Framer project. `Get Brainwear` → `shop.emotiv.com/mn8` stays `hero` (Brainwear IS MN8's consumer brand — same product).
+
 
 ### Changelog
 
+- 2026-09-17 (later): **Rev-4 value split — `crosssell` + `related` added, `productnav` redefined.** Two new section values (25 → 27) after live DOM re-inspection showed `productnav` was carrying 5 distinct roles on `/emotiv-bci` alone. `productnav` now means **the TOP sub-nav strip only** — verified against live `/epoc-x`, where its 6 `productnav` instances are 4 anchors + 2 nav `Buy` buttons inside the same top-strip container. Body links re-bucket by href: `crosssell` (different Emotiv product) and `related` (leaves the page, refers no other product). **25 new exports** in `umami.tsx` (69 → 94): `trackCrosssell<Prod>` ×9 (buy intent, `cta_click`), `trackCrosssellInfo<Prod>` ×9 (learn intent, `content_click`), `trackRelated<Prod>` ×7. All 10 page docs re-mapped; 6 of them had rows corrected against real hrefs (hero/sub-nav splits by container, unwired cross-sell links, mis-attributed rows). Framer wiring still pending user action.
+
 - 2026-09-17: **Full product library tracking rollout — repo side complete.** 9 emotiv.com product pages + brainwear.app live-audited 2026-09-17 (positional DOM scan, nav/footer excluded). 5 new product slugs (`studio`, `brainviz`, `bci`, `launcher`, `brainwear` → vocab total 11). **20 new exports** in `umami.tsx` (49 → 69): heroes ×5, sub-navs ×5 (incl. brainwear), downloads ×4, accessories ×2, accessoriesall ×3, banner ×1. Per-page wiring docs created for all 9 unmapped pages + brainwear. Plan-vs-live corrections recorded per page. **Framer wiring pending user action** — no page-local events live yet.
 
-**Two exports ship unused (deliberate):** `trackHeroStudio` and `trackHeroLauncher`. `/studio` has no hero conversion CTA at all (its only page-local CTAs are two cross-sell links), and `/emotiv-launcher`'s hero button is an on-page `#download` anchor → `productnav`, not a purchase. Both were specified by the rollout plan; they are kept for picker parity so a future hero CTA on either page can be wired without a code change. `trackAccessoriesAllFlex` / `trackAccessoriesAllMn8` / `trackAccessoriesAllInsight` are all three in use (contrary to an intermediate reading of the audit — `flex` and `mn8` do carry a "See All Accessories" link at 95% / 94%).
+**Exports shipping unused (deliberate):** `trackHeroStudio` is unused — `/studio` has no hero conversion CTA (its only page-local CTAs are the two cross-sell links, and it has no top sub-nav either). `trackHeroLauncher` is **in use** as of rev 4: Launcher's hero anchor is the site's primary install action, and with no top sub-nav on that page it maps to `hero`. Both were specified by the rollout plan and are kept for picker parity so a future hero CTA can be wired without a code change. `trackAccessoriesAllFlex` / `trackAccessoriesAllMn8` / `trackAccessoriesAllInsight` are all three in use (contrary to an intermediate reading of the audit — `flex` and `mn8` do carry a "See All Accessories" link at 95% / 94%).

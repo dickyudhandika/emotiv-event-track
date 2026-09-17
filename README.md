@@ -48,7 +48,11 @@ This repo defines the **section vocabulary** — the controlled list of `section
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 
-**Product values** (2026-09-17, rev 3): `epoc_x`, `epoc_x_pro`, `mn8`, `flex`, `insight`, `emotivpro`, `studio`, `brainviz`, `bci`, `launcher`, `brainwear` (11 total: 6 hardware + 5 software/brand). Product prop is for **page-local** content only — global nav/footer/snackbar never carry it. See `vocabularies/emotiv.md` → Product vocabulary.
+**Section values:** `nav`, `hero`, `banner`, `applications`, `pathway`, `platform`, `product`, `news`, `footer`, `productnav`, `features`, `casestudies`, `testimonials`, `leadmagnet`, `specs`, `usecases`, `gettingstarted`, `tiers`, `community`, `download`, `footernav`, `snackbar`, `accessories`, `comparison`, `accessoriesall`, `crosssell`, `related` (27).
+
+**`productnav` / `crosssell` / `related` (rev 4, 2026-09-17)** — `productnav` = the TOP sub-nav strip only. Body links split by href: `crosssell` = different Emotiv product, `related` = leaves the page but refers no other product. Same-product destinations and dependency links stay on the page's own sections. See `vocabularies/emotiv.md` → Value split.
+
+**Product values** (2026-09-17, rev 4): `epoc_x`, `epoc_x_pro`, `mn8`, `flex`, `insight`, `emotivpro`, `studio`, `brainviz`, `bci`, `launcher`, `brainwear` (11 total: 6 hardware + 5 software/brand). Product prop is for **page-local** content only — global nav/footer/snackbar never carry it. See `vocabularies/emotiv.md` → Product vocabulary.
 
 **Product label variants** (same `product` section): `trackProduct` injects event + section only; label comes from the global listener's auto-capture with Framer dedupe (name leads the card → `Epoc X` / `MN8` / `Flex 2.0` / `Insight` distinct). See `RULES.md` → Labels → Framer dedupe.
 
