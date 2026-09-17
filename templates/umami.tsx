@@ -452,6 +452,95 @@ export function trackHeroEmotivpro(Component: ComponentType): ComponentType {
     })
 }
 
+// Product page heroes — software products (2026-09-17)
+
+export function trackHeroStudio(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="studio"
+            />
+        )
+    })
+}
+
+export function trackHeroBrainviz(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="brainviz"
+            />
+        )
+    })
+}
+
+export function trackHeroBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+
+export function trackHeroLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+
+export function trackHeroBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="hero"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+
+// Banner CTAs on product pages (2026-09-17) — section=banner + product=page product.
+// Banner = bottom CTA section (2nd hero / promo band), distinct from hero (first fold).
+
+export function trackBannerEpocXPro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="banner"
+                data-umami-event-product="epoc_x_pro"
+            />
+        )
+    })
+}
+
 // Product sub-navs (Phase 1 + 3) — replaces plain trackProductNav on product pages
 
 export function trackProductNavInsight(Component: ComponentType): ComponentType {
