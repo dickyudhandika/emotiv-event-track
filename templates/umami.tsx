@@ -11,11 +11,12 @@ import { forwardRef, type ComponentType } from "react"
 //         snackbar, accessories
 // Legacy: pricing, howitworks, faq
 //
-// Product vocabulary (2026-09-08, rev 2): product = WHAT they clicked (product
-// identity). Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro.
+// Product vocabulary (2026-09-17, rev 3): product = WHAT they clicked (product
+// identity). Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro,
+// studio, brainviz, bci, launcher, brainwear (11 total: 6 hardware + 5 software/brand).
 // GLOBAL/shared components (nav, footer, footernav, snackbar) NEVER carry
 // product — they stay section-only everywhere. Product only on page-local
-// content (hero, productnav, accessories, homepage carousel).
+// content (hero, productnav, accessories, download, homepage carousel).
 // Accessories: section=accessories + product=parent (e.g. epoc_x) — label
 // differentiates the item. NO accessory product slugs.
 // Model: product = what, section = where, URL path filter = which page (free in Umami).
