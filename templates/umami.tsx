@@ -627,6 +627,76 @@ export function trackProductNavEmotivpro(Component: ComponentType): ComponentTyp
     })
 }
 
+export function trackProductNavStudio(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="studio"
+            />
+        )
+    })
+}
+
+export function trackProductNavBrainviz(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="brainviz"
+            />
+        )
+    })
+}
+
+export function trackProductNavBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+
+export function trackProductNavLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+
+export function trackProductNavBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="productnav"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+
 // Homepage hero carousel "See X" (Variant B) — replaces plain trackProduct there
 
 export function trackProductSeeEpocX(Component: ComponentType): ComponentType {
