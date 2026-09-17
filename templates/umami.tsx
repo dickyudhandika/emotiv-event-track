@@ -870,3 +870,136 @@ export function trackAccessoriesInsight(Component: ComponentType): ComponentType
     })
 }
 
+export function trackAccessoriesFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessories"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackAccessoriesMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessories"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
+// Download CTAs on software pages (2026-09-17) — section=download + product=<software>.
+// For pages where the download IS the hero CTA (bci, launcher), use the hero export
+// instead. These are for SECONDARY download links (app store badges, installer rows).
+
+export function trackDownloadBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="download"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+
+export function trackDownloadLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="download"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+
+export function trackDownloadBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="download"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+
+export function trackDownloadEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="download"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+
+// Accessory-index CTAs — other product pages (2026-09-17). Same role as
+// trackAccessoriesAllEpocX, per-product export so the product dimension survives.
+
+export function trackAccessoriesAllInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessoriesall"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+
+export function trackAccessoriesAllFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessoriesall"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+
+export function trackAccessoriesAllMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="accessoriesall"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+
