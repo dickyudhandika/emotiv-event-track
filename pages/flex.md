@@ -19,7 +19,7 @@ Current page traffic: pending (Umami website `338c5f5a`).
 
 ## Decisions
 
-**Rev-4 split (2026-09-17).** Top sub-nav is **6** items: the 5 on-page anchors **plus the sub-nav `Buy`**. Note `Buy` (sub-nav, `utm_campaign=top-sub-navbar`) and `Buy now` (hero, `utm_campaign=hero+buy+button`) are the **same destination but different roles** — position decides, matching the `/epoc-x` precedent where the nav `Buy` is already live under `productnav`. That gives "nav buy vs hero buy" as a real comparison.
+**Rev-4 split (2026-09-17).** Top sub-nav is **6 destinations / 7 instances**: the 5 on-page anchors **plus the sub-nav `Buy`** (×2, `utm_campaign=top-sub-navbar`). Note `Buy` (sub-nav) and `Buy now` (hero, `utm_campaign=hero+buy+button`) are the **same destination but different roles** — position decides, matching the `/epoc-x` precedent where the nav `Buy` is already live under `productnav`. That gives "nav buy vs hero buy" as a real comparison.
 
 The sub-nav `EmotivPRO` anchor points at `./flex#emotiv-flex-saline-emotivpro` — a **same-page anchor**, so it is genuinely `productnav`, not crosssell. The *separate* EmotivPRO band lower down (rows 4-5) is the cross-sell. Same word, two roles — the href is what separates them.
 

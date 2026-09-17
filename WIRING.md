@@ -80,7 +80,7 @@ No sub-nav, cross-sell, accessories, case studies, or specs. **Recommended first
 
 | Section | Export | Event | Planted on | Labels |
 |---|---|---|---|---|
-| `productnav` | `trackProductNavFlex` | `cta_click` | top strip x6 (Overview, Features, EmotivPRO, For Researchers, Tech Specs, Buy x2) | per anchor |
+| `productnav` | `trackProductNavFlex` | `cta_click` | top strip — 6 destinations / 7 instances (Overview, Features, EmotivPRO, For Researchers, Tech Specs, Buy x2) | per anchor |
 | `hero` | `trackHeroFlex` | `cta_click` | hero buy (x2, 10%) | Buy now |
 | `crosssell` | `trackCrosssellFlex` | `cta_click` | EmotivPRO band "PRO License" x2 (45%) | PRO License |
 | `crosssell` | `trackCrosssellInfoFlex` | `content_click` | EmotivPRO band "Learn about EmotivPRO" x3 (30%) | Learn about EmotivPRO |
