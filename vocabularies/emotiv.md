@@ -1,9 +1,9 @@
 # Vocabulary: EMOTIV
 
 Site: https://www.emotiv.com
-Updated: 2026-09-11
+Updated: 2026-09-17
 Section values: 25 (comparison, accessoriesall added)
-Product values: 6
+Product values: 11
 
 ## Vocabulary
 
@@ -49,8 +49,13 @@ Product values: 6
 | 4 | `flex` | Flex 2 headset | hero, productnav |
 | 5 | `insight` | Insight 5-channel headset | hero, productnav, accessories |
 | 6 | `emotivpro` | EMOTIVPRO software | hero, productnav |
+| 7 | `studio` | Emotiv Studio software | productnav |
+| 8 | `brainviz` | Emotiv BrainViz software | hero, productnav |
+| 9 | `bci` | EmotivBCI software | hero, productnav, download |
+| 10 | `launcher` | Emotiv Launcher software | productnav, download |
+| 11 | `brainwear` | Brainwear by Emotiv (brainwear.app) | hero, productnav, download |
 
-Rules: values match page slugs, underscored — 6 core products only. Accessories do NOT get product slugs: they fire `section=accessories` + `product=<parent>` and the auto-captured label names the item. Bundle promos map to the product, not the bundle name. Snackbar bundle promo stays section-only (global component).
+Rules: values match page slugs, underscored — 11 products (6 hardware + 5 software/brand). Accessories do NOT get product slugs: they fire `section=accessories` + `product=<parent>` and the auto-captured label names the item. Bundle promos map to the product, not the bundle name. Snackbar bundle promo stays section-only (global component). Software products (`studio`, `brainviz`, `bci`, `launcher`) use `section=download` for installer/app-store links and `hero`/`productnav` for page-local CTAs. `brainwear` is a separate domain (brainwear.app) sharing the same Umami site ID — tracked with the same vocabulary, no shared components with emotiv.com.
 
 ## Legacy (kept for other pages, not in count)
 
