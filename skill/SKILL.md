@@ -244,5 +244,7 @@ Never rename an existing value in a PR — renaming orphans historical data. Dep
 ## Reference
 
 - Repo: https://github.com/dickyudhandika/emotiv-event-track
+- **Shareable skill link** (paste into any agent, no install):
+  https://raw.githubusercontent.com/dickyudhandika/emotiv-event-track/main/skill/SKILL.md
 - Worked examples: `vocabularies/emotiv.md` (27 values, 11 entity slugs), `vocabularies/_template.md` (blank), `RULES.md`, `WIRING.md`, `NEUROSCIENCE.md` (A/B tag snippet, verified live)
 - This skill is canonical in the repo at `skill/SKILL.md`. Keep any local copy in sync with it.
