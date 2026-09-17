@@ -8,10 +8,10 @@ import { forwardRef, type ComponentType } from "react"
 // Values: nav, hero, banner, applications, pathway, platform, product, news,
 //         footer, productnav, features, casestudies, testimonials, leadmagnet,
 //         specs, usecases, gettingstarted, tiers, community, download, footernav,
-//         snackbar, accessories
+//         snackbar, accessories, comparison, accessoriesall, crosssell, related
 // Legacy: pricing, howitworks, faq
 //
-// Product vocabulary (2026-09-17, rev 3): product = WHAT they clicked (product
+// Product vocabulary (2026-09-17, rev 4): product = WHAT they clicked (product
 // identity). Values: epoc_x, epoc_x_pro, mn8, flex, insight, emotivpro,
 // studio, brainviz, bci, launcher, brainwear (11 total: 6 hardware + 5 software/brand).
 // GLOBAL/shared components (nav, footer, footernav, snackbar) NEVER carry
@@ -21,6 +21,19 @@ import { forwardRef, type ComponentType } from "react"
 // differentiates the item. NO accessory product slugs.
 // Model: product = what, section = where, URL path filter = which page (free in Umami).
 // Per-product exports are STATIC (no string-arg factories — invisible to Framer picker).
+//
+// Section split (rev 4, 2026-09-17) — productnav is the TOP sub-nav strip ONLY.
+// The top strip is the container that holds the section anchors AND the nav's own
+// button (Buy / Pre-Order / Download). Live precedent: /epoc-x has 6 productnav
+// instances = 4 anchors + 2 nav Buy buttons. Position decides, not the href.
+// Body links are split by href:
+//   crosssell -> destination is a DIFFERENT Emotiv product (page or its shop URL)
+//   related   -> leaves the page but refers NO other product (docs, developer,
+//                solution pages, contact, own-product support)
+// Same-product destinations and dependency links are NOT crosssell: own shop URL,
+// own add-on, own anchors stay hero/productnav/download/accessories. "Download
+// EmotivBCI" -> ./emotiv-launcher is the page's own install path, so it stays
+// hero — the page's own conversion funnel always outranks the destination test.
 
 // ── Global / shared ──────────────────────────────────────────────────────────
 
@@ -1003,3 +1016,360 @@ export function trackAccessoriesAllMn8(Component: ComponentType): ComponentType 
     })
 }
 
+// ── Cross-sell + related (2026-09-17, rev 4) ──────────────────────────────────
+// Vocabulary split decided 2026-09-17: `productnav` means the TOP product sub-nav
+// ONLY. Links in the page body get their own values so productnav stops being a
+// junk drawer:
+//   crosssell = page-local link whose destination is a DIFFERENT Emotiv product
+//               (product page or its shop URL). Two exports per product, because
+//               buy-intent and browse-intent are different questions:
+//                 trackCrosssell<Prod>     -> cta_click     (Buy now, Get Pricing,
+//                                             PRO License, Start now, license)
+//                 trackCrosssellInfo<Prod> -> content_click (Learn about/More,
+//                                             Explore, Discover)
+//   related   = page-local in-body link that refers NO other product: same-page
+//               section anchors in the body, docs/toolkit links, solution or
+//               developer pages, support/contact. -> content_click
+// Same-product destinations are NOT cross-sell (own shop URL, own add-on, own
+// anchors) — those stay hero / productnav / download / accessories.
+// Dependency links are NOT cross-sell either: a link to a different product that
+// is nonetheless this page's own install/primary path stays with the page's
+// primary section ("Download EmotivBCI" -> ./emotiv-launcher stays hero). The
+// page's own conversion funnel always outranks the destination test.
+// Cross-sell labels: pass an explicit data-umami-event-label per instance when
+// several buttons share text (e.g. three "Buy now" going to Epoc X / Insight /
+// MN8) — auto-capture collapses them to one string otherwise.
+
+// Cross-sell — buy intent (cta_click)
+
+export function trackCrosssellBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+export function trackCrosssellFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+export function trackCrosssellMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+export function trackCrosssellStudio(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="studio"
+            />
+        )
+    })
+}
+export function trackCrosssellEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+export function trackCrosssellLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+export function trackCrosssellInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+export function trackCrosssellBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+export function trackCrosssellBrainviz(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="cta_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="brainviz"
+            />
+        )
+    })
+}
+
+// Cross-sell — learn intent (content_click)
+
+export function trackCrosssellInfoBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoFlex(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="flex"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoStudio(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="studio"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+export function trackCrosssellInfoBrainviz(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="crosssell"
+                data-umami-event-product="brainviz"
+            />
+        )
+    })
+}
+
+// Related in-body links (no other product referred)
+
+export function trackRelatedEmotivpro(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="emotivpro"
+            />
+        )
+    })
+}
+export function trackRelatedInsight(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="insight"
+            />
+        )
+    })
+}
+export function trackRelatedMn8(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="mn8"
+            />
+        )
+    })
+}
+export function trackRelatedLauncher(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="launcher"
+            />
+        )
+    })
+}
+export function trackRelatedBrainwear(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="brainwear"
+            />
+        )
+    })
+}
+export function trackRelatedBci(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="bci"
+            />
+        )
+    })
+}
+export function trackRelatedBrainviz(Component: ComponentType): ComponentType {
+    return forwardRef((props, ref) => {
+        return (
+            <Component
+                ref={ref}
+                {...props}
+                data-umami-event="content_click"
+                data-umami-event-section="related"
+                data-umami-event-product="brainviz"
+            />
+        )
+    })
+}
