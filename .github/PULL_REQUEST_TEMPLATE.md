@@ -8,6 +8,18 @@
 
 <!-- name + URL -->
 
+## Page builder / host
+
+<!-- Framer / Webflow / WordPress / custom — affects where overrides get planted and how counts are verified -->
+
+## Plant table (audited from the live DOM)
+
+| # | Region | CTA text | `section` | event | export | subject |
+|---|---|---|---|---|---|---|
+|  |  |  |  |  |  |  |
+
+<!-- Expected live counts as `>= N`, never equality — builders render one button per breakpoint variant. -->
+
 ## Sections added / changed
 
 | Value | Role | Pages | CTAs | Event |

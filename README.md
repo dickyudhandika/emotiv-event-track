@@ -1,6 +1,6 @@
 # Emotiv Event Track
 
-A shared **section vocabulary** for Umami event tracking on Emotiv's websites — plus the rules and skill that keep it consistent.
+A shared **section vocabulary** for Umami event tracking — plus the rules, skill, and export template that keep it consistent. Generic enough for any site; EMOTIV is the worked example.
 
 ## What this is
 
@@ -15,7 +15,9 @@ Umami custom events have three dimensions:
 
 This repo defines the **section vocabulary** — the controlled list of `section` values per site — plus the rules for how values get added, so dashboards stay comparable and history doesn't break on redesign.
 
-### Available values (EMOTIV)
+**Generic on purpose.** The rules and the skill (`skill/SKILL.md`) apply to any website and any page builder. Site-specific facts live in one file per site: `vocabularies/<site>.md`. To onboard a new site: share its URL with an agent that has the skill installed — it audits the live page, proposes a plant table, writes the vocabulary, and opens a PR here.
+
+### Available values (EMOTIV — worked example)
 
 **Column legend:**
 - **Value** — the `section` prop sent to Umami. Lowercase, single word, stable forever.
@@ -33,7 +35,7 @@ This repo defines the **section vocabulary** — the controlled list of `section
 | 7 | `product` | hardware/accessory grid | homepage, comparison, accessories | View Specs, Shop now, See Accessory | `cta_click` |
 | 8 | `news` | article cards | homepage, blog index | Read latest news, Learn more | `content_click` |
 | 9 | `footer` | footer band + newsletter | all | User & Product Research, Academic Research | `cta_click` |
-| 10 | `productnav` | product sub-nav | product pages | Overview, Case studies, Tech Specs, Buy | `cta_click` |
+| 10 | `productnav` | product sub-nav — TOP strip only | product pages | Overview, Case studies, Tech Specs, Buy | `cta_click` |
 | 11 | `features` | spec feature grid | product pages | feature card clicks | `cta_click` |
 | 12 | `casestudies` | case study cards | product pages | See case study ×3 | `content_click` |
 | 13 | `testimonials` | researcher quotes | product pages | Validation Studies | `cta_click` |
@@ -45,6 +47,12 @@ This repo defines the **section vocabulary** — the controlled list of `section
 | 19 | `community` | developer Learn & Connect | /developer | Explore, Go to Github | `content_click` |
 | 20 | `download` | software download links | emotivpro, developer | App Store, Download | `cta_click` |
 | 21 | `footernav` | footer link columns | all | Academic Research, Epoc X, Knowledge Base | `content_click` |
+| 22 | `snackbar` | floating promo banner | all | MN8 bundle promo | `cta_click` |
+| 23 | `accessories` | accessory cross-sell cards | product pages | accessory card clicks | `cta_click` |
+| 24 | `comparison` | comparison page CTA | product pages | Show full comparison | `cta_click` |
+| 25 | `accessoriesall` | accessories index CTA | product pages | See all accessories | `cta_click` |
+| 26 | `crosssell` | link to a **different** product | product pages (body) | Buy now → Epoc X, Learn about EMOTIVPRO | `cta_click` (buy) / `content_click` (learn) |
+| 27 | `related` | in-body link referring **no other product** | product pages (body) | Performance Metrics, Register, Node-RED | `content_click` |
 
 **Legacy** (kept for other pages, not in count): `pricing` (`cta_click`), `howitworks` (`cta_click`), `faq` (`faq_toggle`).
 
@@ -77,10 +85,10 @@ emotiv-event-track/
 ├── WIRING.md                    # what's planted where (per page)
 ├── NEUROSCIENCE.md              # neuroscience blog A/B banner tracking (verified)
 ├── skill/
-│   └── SKILL.md                 # same rules, agent-executable (any harness)
+│   └── SKILL.md                 # generic, agent-executable (any harness, any site) — canonical
 ├── vocabularies/
-│   ├── emotiv.md                # EMOTIV vocabulary (reference)
-│   └── _template.md             # blank per-site vocabulary
+│   ├── emotiv.md                # EMOTIV vocabulary (worked example)
+│   └── _template.md             # blank per-site vocabulary — start here for a new site
 ├── templates/
 │   └── umami.tsx                # Framer override file template
 ├── .github/
@@ -93,27 +101,30 @@ emotiv-event-track/
 
 ### 1. Install the skill (manual — works in any harness)
 
-The skill is plain markdown. Copy `skill/SKILL.md` into your agent's instructions:
+The skill is plain markdown and **generic** — it works for any site, not just Emotiv. Copy `skill/SKILL.md` into your agent's instructions:
 
 | Harness | Where it goes |
 |---|---|
-| Hermes | `~/.hermes/skills/emotiv-event-track/SKILL.md` |
-| Claude Code | `~/.claude/skills/emotiv-event-track/SKILL.md` |
-| Codex | `~/.codex/skills/` or paste into `AGENTS.md` |
+| Hermes | `~/.hermes/profiles/<profile>/skills/umami-section-vocabulary/SKILL.md` |
+| Claude Code | `~/.claude/skills/umami-section-vocabulary/SKILL.md` |
+| Codex | `~/.codex/skills/umami-section-vocabulary/SKILL.md` or paste into `AGENTS.md` |
 | Cursor | `.cursor/rules/` or `AGENTS.md` |
 | Any agent | paste `SKILL.md` content into system prompt / context file |
 
-No CLI, no dependencies — just a file.
+No CLI, no dependencies — just a file. Keep the local copy in sync with `skill/SKILL.md`; the repo copy is canonical.
 
-### 2. Send the page
+### 2. Share a link
 
-Give the agent a URL (or sitemap) and the site's vocabulary file. The agent:
+Give the agent a URL (or sitemap). Nothing else is required — the agent loads the site's vocabulary from this repo if one exists, audits the live page, and comes back with a plant table:
 
-1. **Scans** the page — lists every CTA region top-to-bottom
-2. **Compares** — against the site vocabulary
-3. **Reuses** — role exists → assign existing value
-4. **Adds** — role missing + "will you compare it?" = yes → new value (3 gates + 4 steps, see RULES.md)
-5. **Outputs** — updated vocabulary + `umami.tsx` exports + wiring instructions
+1. **Loads** the site vocabulary (or starts from [`vocabularies/_template.md`](vocabularies/_template.md))
+2. **Audits** the live DOM — every CTA region, container-based, not from a plan or screenshot
+3. **Compares** — against the vocabulary
+4. **Reuses** — role exists → assign the existing value
+5. **Adds** — role missing + "will you compare it?" = yes → new value (3 gates + 4 steps, see `RULES.md`)
+6. **Proposes** a plant table — region, CTA, `section`, event, export → **you approve before anything is written**
+7. **Outputs** the vocabulary file + exports + wiring instructions
+8. **Opens a PR** back here (see [CONTRIBUTING.md](CONTRIBUTING.md))
 
 ### 3. Wire it in Framer
 

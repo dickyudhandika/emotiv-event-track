@@ -1,16 +1,18 @@
 # Contributing
 
-Thanks for contributing to the Emotiv Event Track vocabulary. Three contribution types:
+Thanks for contributing to the Umami section-vocabulary repo. Three contribution types:
 
-1. **New site vocabulary** — a new file in `vocabularies/`
+1. **New site vocabulary** — a new file in `vocabularies/` (works for any site, any page builder)
 2. **New section value** — an edit to an existing site's vocabulary + exports
 3. **Rule change** — an edit to `RULES.md` / `skill/SKILL.md`
 
+You don't have to write any of this by hand. Point an agent at the site's URL with the skill installed (`skill/SKILL.md`) and it audits the page, drafts the plant table, writes the files, and opens the PR for you. Reviewing the plant table is the human job.
+
 ## Process
 
-1. **Fork** the repo, create a branch.
+1. **Fork** the repo, create a branch (`vocab/<site>`).
 2. **Make your change** — follow the rules in `RULES.md`.
-3. **Open a PR** using the template (`.github/PULL_REQUEST_TEMPLATE.md`).
+3. **Open a PR** using the template (`.github/PULL_REQUEST_TEMPLATE.md`). Include the audited plant table.
 4. **Review** — maintainers check the gates: role missing, will-compare test, same-page test, naming, vocabulary updated everywhere.
 
 ## Rules of thumb
