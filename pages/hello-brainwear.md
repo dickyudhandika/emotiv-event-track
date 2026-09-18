@@ -8,7 +8,7 @@ Codebase: [`Emotiv/web-onboarding`](https://github.com/Emotiv/web-onboarding) �
 
 | # | Value | Role | Where on page | Example CTAs | Event | Status |
 |---|---|---|---|---|---|---|
-| 1 | `hero` | the page's own buy CTA | bundle card, boxes band (~85%) | Get the bundle $399 (→ `shop.emotiv.com/mn8`) | `cta_click` + `product=brainwear` | 🟡 planted, pending deploy |
+| 1 | `hero` | the page's own buy CTA | bundle card, boxes band (~85%) | Get the bundle $399 (→ `shop.emotiv.com/mn8`) | `cta_click` + `product=brainwear` | 🟡 deployed 2026-09-18, awaiting first live events |
 | 2 | `related` | link to the Brainwear product site | boxes band (~85%) | Explore Brainwear (→ `brainwear.app`) | `content_click` + `product=brainwear` | ❌ gap — out of scope this pass |
 | 3 | — | back link to the onboarding picker | header (~2%) | Back (→ `/`) | — | ⏸ deferred — internal nav, not a CTA |
 
