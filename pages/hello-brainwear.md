@@ -28,11 +28,12 @@ The page has exactly three anchors. Rows 2-3 are listed so the next scan starts 
 
 ## ⚠️ Consent gating — unique to this site
 
-`hello.emotiv.com` runs CookieYes as its CMP. Umami is **not** loaded via the GDPR guide's attribute-based blocking — that was tried first and found broken for Umami (see below). Instead an inline loader ahead of the CookieYes tag creates the script itself once analytics is accepted, via `cookieyes_banner_load`, `cookieyes_consent_update`, and a direct read of the stored `cookieyes-consent` cookie. Nothing loads before consent. Consequences for this vocabulary are unchanged:
+`hello.emotiv.com` runs CookieYes as its CMP. Umami is **not** loaded via the GDPR guide's attribute-based blocking — that was tried first and found broken for Umami (see below). Instead an inline loader ahead of the CookieYes tag creates the script itself once analytics is accepted, via `cookieyes_banner_load`, `cookieyes_consent_update`, and a direct read of the stored `cookieyes-consent` cookie. Nothing loads before consent, and every send is re-checked against the stored consent through Umami's `data-before-send` hook — so a visitor who **revokes mid-session stops being tracked immediately**, no reload needed. Consequences for this vocabulary are unchanged:
 
 - **Clicks before consent are not recorded.** Expect this page to undercount against `www.emotiv.com`, which is not consent-gated the same way. Do not read the gap as a wiring fault.
 - **`data-umami-event` attributes are the safe mechanism here.** They sit inert in the DOM and bind whenever Umami loads. Anything calling `window.umami.track(...)` directly would throw on this site, because `window.umami` is `undefined` until consent.
 - The console-spy verification in `SKILL.md` only works **after** accepting analytics cookies on this domain.
+- **Revoke is honoured mid-session.** The `data-before-send` hook returns the payload only while the cookie says `analytics:yes`; otherwise the request is dropped before it leaves. If you copy this: return the *payload*, never a bare `true` — Umami uses the hook's return value **as** the payload, so `true` would send garbage on every request.
 
 ### Why not attribute-based blocking (a warning for other Emotiv properties)
 
