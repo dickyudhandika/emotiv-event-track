@@ -46,7 +46,7 @@ Label = auto-capture + Framer dedupe (global listener). Explicit `data-umami-eve
 1. `templates/umami.tsx` → Code Overrides, paste current file.
 2. Per section, select element → Overrides → pick matching export.
 3. Publish.
-4. Console spy: `window._spy=[]; const _t=window.umami.track; window.umami.track=(n,p)=>(_spy.push({n,p}),_t(n,p));` → click → check `{ n, p: { section, label } }`.
+4. Verify the payload: click a tracked element → `performance.getEntriesByType('resource').filter(r=>r.name.includes('api/send')).length` ≥ 2 → assert `api/send` body `payload.website` + `payload.data`. (A `window.umami.track` console spy observes nothing — the internal click listener bypasses it.)
 
 ### Changelog / A/B log
 

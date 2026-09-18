@@ -186,9 +186,8 @@ Note: brainwear.app is a separate Framer project — `umami.tsx` must be pasted 
 ## Verification (after each phase publish)
 
 1. `curl -sL "https://www.emotiv.com/insight?v=<n>" | grep -o 'data-umami-event-product="[^"]*"' | sort | uniq -c` — attributes live.
-2. Console spy on live page, click hero button:
-   `window._spy=[]; const _t=window.umami.track; window.umami.track=(n,p)=>(_spy.push({n,p}),_t(n,p));`
-   → expect `{ n: "cta_click", p: { section: "hero", product: "insight", label: "Pre-order" } }`
+2. Payload check on live page, click hero button:
+   `performance.getEntriesByType('resource').filter(r=>r.name.includes('api/send')).length` → ≥ 2, then assert the `api/send` body carries `payload.website` + `payload.data` = `{ section: "hero", product: "insight", label: "Pre-order" }`. (Do not use a `window.umami.track` console spy — the internal click listener bypasses it and the spy stays empty while events send.)
 3. Umami Cloud API (after 1 day of traffic):
    `GET /v1/websites/338c5f5a-72c4-4a8d-b513-5f156b91824e/event-data/values?event=cta_click&propertyName=product` → `insight` appears with counts.
 4. Funnel re-check: Events → filter URL Path `/insight`, or new funnel `viewed /insight → cta_click product=insight → purchase`.

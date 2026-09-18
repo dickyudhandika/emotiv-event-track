@@ -183,17 +183,39 @@ Prefer a **session tag** over wrapping events: the tag lives on the injected scr
 
 ## Verification
 
-Runtime spy — click a tracked button and read what actually fired:
+**Verify the outbound payload — not the DOM, not `window.umami`.** Two traps make the obvious checks lie:
+
+- A static-HTML grep proves the attributes are *planted*, never that the tracker is *alive*. A CMP that re-injects a blocked script on consent strips its `data-*` attributes: the tag loads, `window.umami` exists, and every `track()` no-ops with `getSession().website === null`. Zero events, zero errors.
+- Patching `window.umami.track` observes nothing. The script's own `data-umami-event` click listener calls an internal function, not the exported one — the spy stays `[]` while real events send fine. Never treat it as a pass signal.
+
+Click the tracked element, then read what actually left the browser:
 
 ```js
-window._spy = [];
-const _t = window.umami.track;
-window.umami.track = (n, p) => (_spy.push({ n, p }), _t(n, p));
+performance.getEntriesByType('resource')
+  .filter(r => r.name.includes('api/send')).length   // >= 2 after accept: pageview + event
 ```
 
-Expect `{ n: "cta_click", p: { section: "hero", label: "Buy" } }` + a second `api/send` in the Network tab (the first is the pageview).
+Then open `api/send` in the Network tab and assert the body:
 
-**Live re-verify after wiring** (server HTML, cache-busted):
+```json
+{"type":"event","payload":{"website":"<site-id>","hostname":"<host>",
+  "name":"cta_click","data":{"section":"hero","label":"Buy"}}}
+```
+
+`payload.website` matching the expected site id is the pass condition. `getSession()` is a valid **fail** signal (`website: null` + zero sends = dead) but never a pass signal — a stale closure can own the global while a second instance sends correctly.
+
+**Consent-gated sites (CMP present).** Verify all four directions before signing off:
+
+| Test | Expect |
+|---|---|
+| Fresh visitor, no choice made | no analytics tag, zero requests |
+| After accepting analytics | payload arrives with the correct site id |
+| After rejecting | zero requests |
+| Accept → **revoke mid-session** → click a tracked element | zero requests |
+
+The last row is what ships broken. If the tracker stays loaded for the life of the page, a visitor who revokes is still tracked until reload. Umami's fix is one attribute: `data-before-send` naming a global that returns false without consent — the send is dropped before the request. Verified end to end: accept → sends, revoke → 0 sends, re-accept → resumes.
+
+**Live re-verify after wiring** (server HTML, cache-busted) — proves the plant, not the tracker:
 
 ```bash
 curl -sL "https://<site>/<page>?v=$(date +%s)" | grep -o 'data-umami-event-section="[^"]*"' | sort | uniq -c
@@ -240,6 +262,9 @@ Never rename an existing value in a PR — renaming orphans historical data. Dep
 - **Factory-pattern exports** — inner component props shadow outer factory props; the picker silently breaks. Use explicit function declarations.
 - **A picker that filters by signature** — only lists `(Component) => Component` overrides. A factory taking a string arg never appears. Static exports with hardcoded labels.
 - **Layer name as identity** — `data-framer-name` / class names are unreliable (typos, only set on some instances). Identity lives in the rendered text or the data.
+- **Patching `window.umami.track` as a verification method** — the internal click listener bypasses it. The spy stays `[]` while events send. Read the `api/send` payload instead.
+- **Treating `window.umami.getSession().website === null` as "not wired yet"** — usually means the tracker is dead (CMP stripped its `data-*`), not that it is waiting for consent.
+- **Shipping a consent gate with no revoke path** — accept→revoke mid-session keeps tracking until reload. Gate the send, not just the load.
 
 ## Reference
 

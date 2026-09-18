@@ -39,10 +39,9 @@ curl -sL "https://www.emotiv.com/epoc-x-pro?v=$(date +%s)" | grep -oE 'data-umam
 ```
 Expected: `epoc_x_pro` with count ≥ 6 (2 hero + 4 banner).
 
-Console spy (click a hero button):
+Payload check (click a hero button):
 ```js
-window._spy = [];
-const _t = window.umami.track;
-window.umami.track = (n, p) => (_spy.push({ n, p }), _t(n, p));
+performance.getEntriesByType('resource').filter(r => r.name.includes('api/send')).length  // ≥ 2
 ```
-Expected: `{ n: "cta_click", p: { section: "hero", product: "epoc_x_pro", label: "Reserve Yours Today" } }`.
+Then assert the `api/send` body: `payload.website` = `338c5f5a-…`, `payload.data` = `{ section: "hero", product: "epoc_x_pro", label: "Reserve Yours Today" }`.
+(Don't use a `window.umami.track` console spy — Umami's internal click listener bypasses it.)

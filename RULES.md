@@ -122,10 +122,11 @@ Why: prop-reading overrides are the only way to track reusable components when i
 ## Verification
 
 ```js
-// Console spy — click a tracked button, check _spy
-window._spy = [];
-const _t = window.umami.track;
-window.umami.track = (n, p) => (_spy.push({ n, p }), _t(n, p));
+// Click a tracked button, then count what actually left the browser
+performance.getEntriesByType('resource').filter(r => r.name.includes('api/send')).length
 ```
 
-Expected: `{ n: "cta_click", p: { section: "hero", label: "Buy" } }` + a 2nd `api/send` in Network tab (first = pageview).
+Expected ≥ 2 after consent (1 pageview + 1 event). Open `api/send` in Network → assert the body:
+`{"type":"event","payload":{"website":"338c5f5a-…","name":"cta_click","data":{"section":"hero","label":"Buy"}}}`.
+
+`payload.website` correct = pass. **Do not** patch `window.umami.track` to verify — the internal click listener bypasses it, so the spy stays `[]` while events send fine. **Do not** treat `getSession().website === null` as "waiting for consent" — it usually means the tracker is dead (CMP stripped its `data-*`).
