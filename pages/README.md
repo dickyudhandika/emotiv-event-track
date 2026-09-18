@@ -19,6 +19,9 @@ Per-page Umami event coverage, one file per page, same table shape as `vocabular
 | EmotivBCI | `/emotiv-bci` | [emotiv-bci.md](emotiv-bci.md) | 🟡 planned (complex, ~40 instances / 8 values) | `PRODUCT-ROLLOUT.md` |
 | Launcher | `/emotiv-launcher` | [emotiv-launcher.md](emotiv-launcher.md) | 🟡 planned (hero anchor + related + crosssell + 4 platform downloads — no productnav) | `PRODUCT-ROLLOUT.md` |
 | Brainwear | `brainwear.app` | [brainwear.md](brainwear.md) | 🟡 planned (zero-to-tracked, separate domain, no shared globals) | `PRODUCT-ROLLOUT.md` |
+| Brainwear onboarding | `hello.emotiv.com/brainwear` | [hello-brainwear.md](hello-brainwear.md) | 🟡 planned (1 CTA wired, pending deploy — consent-gated Umami) | `Emotiv/web-onboarding` |
+
+`hello.emotiv.com` is a third domain on Umami site `338c5f5a` (with `www.emotiv.com` and `brainwear.app`) — same vocabulary, no new values. It is hand-written static HTML rather than Framer, so attributes are planted directly in markup and `templates/umami.tsx` is not involved. It is also the only surface where Umami is consent-gated behind CookieYes, so its counts are not directly comparable with emotiv.com.
 
 Not audited yet: solution pages (`/enterprise`, `/academic-research-and-education`, `/neuromarketing`, `/brain-computer-interface`, `/developer`), blog index, knowledge base. Shared sections (`nav`/`footer`/`footernav`/`snackbar`) already live there — see `vocabularies/emotiv.md`; page-specific wiring unmapped.
 
