@@ -1,6 +1,6 @@
 # Brainwear onboarding `hello.emotiv.com/brainwear` — Event Coverage
 
-Status: 🟡 **planned** — wired in source 2026-09-17, pending deploy. First page tracked on the `hello.emotiv.com` onboarding site. Third domain on Umami site `338c5f5a` (after `www.emotiv.com` and `brainwear.app`), so the same vocabulary applies with no new values.
+Status: 🟡 **planned** — wired and deployed 2026-09-18; awaiting first live events to confirm ✅. First page tracked on the `hello.emotiv.com` onboarding site. Third domain on Umami site `338c5f5a` (after `www.emotiv.com` and `brainwear.app`), so the same vocabulary applies with no new values.
 
 Current page traffic: pending (Umami website `338c5f5a`).
 
@@ -28,17 +28,22 @@ The page has exactly three anchors. Rows 2-3 are listed so the next scan starts 
 
 ## ⚠️ Consent gating — unique to this site
 
-`hello.emotiv.com` runs CookieYes as its CMP, and Umami is loaded with attribute-based blocking per the GDPR implement guide:
-
-```html
-<script type="text/plain" data-cookieyes="cookieyes-analytics" defer src="https://cloud.umami.is/script.js" …>
-```
-
-`type="text/plain"` means the browser never executes Umami until CookieYes flips it on analytics consent. Consequences for this vocabulary:
+`hello.emotiv.com` runs CookieYes as its CMP. Umami is **not** loaded via the GDPR guide's attribute-based blocking — that was tried first and found broken for Umami (see below). Instead an inline loader ahead of the CookieYes tag creates the script itself once analytics is accepted, via `cookieyes_banner_load`, `cookieyes_consent_update`, and a direct read of the stored `cookieyes-consent` cookie. Nothing loads before consent. Consequences for this vocabulary are unchanged:
 
 - **Clicks before consent are not recorded.** Expect this page to undercount against `www.emotiv.com`, which is not consent-gated the same way. Do not read the gap as a wiring fault.
-- **`data-umami-event` attributes are the safe mechanism here.** They sit inert in the DOM and bind whenever Umami loads. Any approach that calls `window.umami.track(...)` directly would throw on this site, because `window.umami` is `undefined` until consent.
+- **`data-umami-event` attributes are the safe mechanism here.** They sit inert in the DOM and bind whenever Umami loads. Anything calling `window.umami.track(...)` directly would throw on this site, because `window.umami` is `undefined` until consent.
 - The console-spy verification in `SKILL.md` only works **after** accepting analytics cookies on this domain.
+
+### Why not attribute-based blocking (a warning for other Emotiv properties)
+
+The guide's `<script type="text/plain" data-cookieyes="cookieyes-analytics" …>` was deployed first and verified live in two browsers. It sends **zero** events, in both paths:
+
+| Path | What CookieYes does | Result |
+|---|---|---|
+| Accept in-session | re-injects the script with only `src` + `type` — **`data-website-id` is dropped** | Umami loads, `getSession().website` is `null`, nothing sent |
+| Return visit, consent stored | never flips the tag back from `text/plain` | Umami never loads |
+
+Root cause: Umami's whole configuration lives in `data-*` attributes, and CookieYes's restore does not preserve them. **Any tracker configured by data attributes (Umami, Plausible, Fathom…) behind CookieYes attribute-blocking will fail the same way, silently.** Scripts configured by URL are unaffected. It is also why `hello.emotiv.com` was missing from the shared site's Hostname filter — no rows had ever arrived from this host.
 
 ## Wiring steps
 
